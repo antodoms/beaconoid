@@ -6,4 +6,4 @@ services:
   - postgresql
 before_script:
   - sleep 15
-  - psql -c 'create database beacon-web-console-test;' -U postgres
+  - psql -c 'create database beacon_web_console_test;' -U postgres
