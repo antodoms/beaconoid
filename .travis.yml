@@ -4,3 +4,6 @@ rvm:
 services: 
   - mongodb
   - postgresql
+before_script:
+  - sleep 15
+  - psql -c 'create database beacon-web-console-test;' -U postgres
