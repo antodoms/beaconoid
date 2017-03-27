@@ -25,6 +25,8 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'unicorn'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -57,3 +59,27 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+group :development do
+  gem 'pry'
+  gem 'pry-byebug'
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'foreman'
+  gem 'better_errors'
+  gem 'letter_opener'
+  gem 'sshkit-sudo'
+
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-sidekiq'
+
+  gem 'brakeman', :require => false
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'faker'
+end
