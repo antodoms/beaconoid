@@ -1,4 +1,4 @@
 class User < ActiveRecord::Base
 
-  devise :database_authenticatable, :registerable, :confirmable, :recoverable, stretches: 12
+  devise :database_authenticatable, :registerable, stretches: 12
 end
