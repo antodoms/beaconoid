@@ -10,7 +10,7 @@ end
 gem 'rails', '~> 5.0.2'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
-gem 'mongoid'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -62,6 +62,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 group :development do
+
+
+
   gem 'pry'
   gem 'pry-byebug'
   gem 'capistrano'
@@ -79,10 +82,10 @@ group :development do
   gem 'brakeman', :require => false
 end
 
-group :production do
-  gem 'aws-sdk', '~>2'
-  gem 'dynamoid', '~> 1'
-end
+gem 'mongoid'
+gem 'aws-sdk', '~>2'
+gem 'dynamoid', '~> 1'
+
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
