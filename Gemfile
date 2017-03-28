@@ -79,6 +79,11 @@ group :development do
   gem 'brakeman', :require => false
 end
 
+group :production do
+  gem 'aws-sdk', '~>2'
+  gem 'dynamoid', '~> 1'
+end
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'faker'
