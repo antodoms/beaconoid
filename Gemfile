@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
+# git_source(:github) do |repo_name|
+#   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+#   "https://github.com/#{repo_name}.git"
+# end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -77,13 +77,12 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano3-unicorn'
-  gem 'capistrano-sidekiq'
 
   gem 'brakeman', :require => false
 end
 
 
-group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'
-  gem 'faker'
-end
+# group :development, :test do
+#   gem 'rspec-rails'
+#   gem 'faker'
+# end
