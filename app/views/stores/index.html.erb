@@ -10,6 +10,7 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Name</th>
       <th>Code</th>
       <th>&nbsp;</th>
@@ -24,6 +25,7 @@
     <% else %>
       <% @stores.each do |store| %>
         <tr>
+          <td><%= store.id %></td>
           <td><%= store.name %></td>
           <td><%= store.code %></td>
           <td>
