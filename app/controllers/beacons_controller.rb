@@ -35,7 +35,7 @@ class BeaconsController < ApplicationController
    		@beacon = Beacon.find(params[:id])
 	
    		if @beacon.update_attributes(beacon_params)
-      		redirect_to :action => 'show', :id => @beacon
+      		redirect_to :action => 'index'
    		else
       		render :action => 'edit'
    		end

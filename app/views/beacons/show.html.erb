@@ -36,9 +36,9 @@
 						    <tr>
 						      <th>Title</th>
 						      <th>Category</th>
-						      <th>Store Name</th>
 						      <th>Description</th>
 						      <th>Price</th>
+						      <th>&nbsp;</th>
 						      <th>&nbsp;</th>
 						      <th>&nbsp;</th>
 						    </tr>
@@ -54,11 +54,12 @@
 						          <td><%= advertisement.name %></td>
 						          <td><%= advertisement.category.name if advertisement.category.present? %></td>
 						          <td><%= advertisement.description %></td>
+						          <td><%= advertisement.price %></td>
 						          <td>
 						            <%= link_to "View", beacon_advertisement_path(@beacon,advertisement), class: "btn btn-primary" %>
 						          </td>
 						          <td>
-						            <%= link_to "Edit", beacon_advertisement_path(@beacon,advertisement), class: "btn btn-default" %>
+						            <%= link_to "Edit", edit_beacon_advertisement_path(@beacon,advertisement), class: "btn btn-default" %>
 						          </td>
 						          <td>
 						            <%= button_to "Delete", advertisement, method: :delete, data: { confirm: "Are you sure you wish to delete #{advertisement.name} ?" }, class: "btn btn-danger" %>

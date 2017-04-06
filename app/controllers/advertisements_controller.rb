@@ -7,12 +7,13 @@ class AdvertisementsController < ApplicationController
 
 	def destroy
 		Advertisement.find(params[:id]).destroy
-		redirect_to :action => 'list'
+		@advertisements = Advertisement.all
+		redirect_to :action => 'index'
 	end
 
 	def show
 		#binding.pry
-		@advertisements = Advertisement.find(params[:id])
+		@advertisement = Advertisement.find(params[:id])
 	end
 
 	def new
@@ -25,9 +26,9 @@ class AdvertisementsController < ApplicationController
 		@advertisement = Advertisement.new(advertisement_params)
 	
    		if @advertisement.save
+   			@advertisements = Advertisement.all
       		redirect_to :action => 'index'
    		else
-      		#@advertisements = Advertisement.all
       		render :action => 'new'
    		end
 	end
@@ -35,23 +36,23 @@ class AdvertisementsController < ApplicationController
 
 	def edit
 		@advertisement = Advertisement.find(params[:id])
-   		@advertisements = Advertisement.all
 	end
 
 	def update
+		#binding.pry
    		@advertisement = Advertisement.find(params[:id])
 	
-   		if @advertisement.update_attributes(advertisement_param)
-      		redirect_to :action => 'show', :id => @advertisement
+   		if @advertisement.update_attributes(advertisement_params)
+   			@advertisements = Advertisement.all
+      		redirect_to beacon_path(@advertisement.beacon)
    		else
-      		@advertisements = Advertisement.all
       		render :action => 'edit'
    		end
    
 	end
 
 	def advertisement_params
-   		params.require(:advertisement).permit(:name, :category_id, :description, :beacon_id)
+   		params.require(:advertisement).permit(:name, :category_id, :description, :beacon_id, :price)
 	end
 
 	def beacon_param

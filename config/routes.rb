@@ -25,18 +25,6 @@ Rails.application.routes.draw do
 
     resources :categories
 
-    get "/app/views/advertisement/list", to: "advertisement#list", as: "adList"
-
-    get 'advertisement/adList'
-    get 'advertisement/new'
-    post 'advertisement/create'
-    patch 'advertisement/update'
-    get 'advertisement/list'
-    get 'advertisement/show'
-    get 'advertisement/edit'
-    get 'advertisement/delete'
-    get 'advertisement/update'
-
 
 
 
