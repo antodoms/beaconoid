@@ -1,4 +1,5 @@
 class Beacon < ActiveRecord::Base
   #include Mongoid::Document
-  has_many :advertisement
+  belongs_to :store
+  has_many :advertisements
 end

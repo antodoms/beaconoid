@@ -1,0 +1,24 @@
+<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav">
+        <li class="<%= 'active' if controller_name == 'dashboard' %>">
+            <a href="<%= dashboard_path %>"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+        </li>
+        <li class="<%= 'active' if controller_name == 'stores' %>">
+            <a href="<%= stores_path %>"><i class="fa fa-fw fa-dashboard"></i> Stores</a>
+        </li>
+        <li class="<%= 'active' if controller_name == 'categories' %>">
+            <a href="<%= categories_path %>"><i class="fa fa-fw fa-dashboard"></i> Categories</a>
+        </li>
+        <li class="<%= 'active' if controller_name == 'beacons' %>">
+            <a href="<%= beacons_path %>"><i class="fa fa-fw fa-edit"></i> Beacons</a>
+        </li>
+        <li class="<%= 'active' if controller_name == 'advertisements' %>">
+            <a href="<%= advertisements_path %>"><i class="fa fa-fw fa-desktop"></i> Advertisements</a>
+        </li>
+        <li>
+            <a href="Shine Solutions Settings.html"><i class="fa fa-fw fa-table"></i> Settings</a>
+        </li>
+    </ul>
+</div>
+<!-- /.navbar-collapse -->

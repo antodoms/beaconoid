@@ -1,0 +1,28 @@
+<%= form_for @beacon do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :store %>
+    <%= f.collection_select :store_id, Store.order(:name),:id,:name, {include_blank: false}, {:class => "form-control"}  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :current_status %>
+    <%= f.text_field :current_status, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :unique_reference %>
+    <%= f.text_field :unique_reference, class: "form-control" %>
+  </div>
+  <div class="form-group">
+  	<%= f.label :latitude %>
+  	<%= f.text_field :latitude, class: "form-control" %>
+  </div>
+
+   <div class="form-group">
+  	<%= f.label :longitude %>
+  	<%= f.text_field :longitude, class: "form-control" %>
+  </div>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

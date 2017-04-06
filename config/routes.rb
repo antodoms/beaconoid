@@ -9,18 +9,21 @@ Rails.application.routes.draw do
 	#########################
 
 	devise_for :users
-	root to: "beacon#list"
-	resources :beacon
+	root to: "stores#index"
 
-	get 'beacon/list'
-   	get 'beacon/new'
-    post 'beacon/create'
-    patch 'beacon/update'
-    get 'beacon/list'
-    get 'beacon/show'
-    get 'beacon/edit'
-    get 'beacon/delete'
-    get 'beacon/update'
+    get 'dashboard', to: "dashboard#index"
+	
+    resources :beacons do
+        resources :advertisements
+    end
+
+    resources :advertisements
+
+    
+
+    resources :stores
+
+    resources :categories
 
     get "/app/views/advertisement/list", to: "advertisement#list", as: "adList"
 

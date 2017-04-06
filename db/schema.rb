@@ -10,24 +10,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404065656) do
+ActiveRecord::Schema.define(version: 20170406064734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "advertisements", force: :cascade do |t|
-    t.string "aId"
-    t.string "aCategory"
-    t.float  "aPrice"
-    t.text   "aDescription"
+    t.string   "name"
+    t.integer  "beacon_id"
+    t.integer  "category_id"
+    t.float    "price"
+    t.string   "description"
+    t.integer  "created_by_id"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["beacon_id"], name: "index_advertisements_on_beacon_id", using: :btree
+    t.index ["category_id"], name: "index_advertisements_on_category_id", using: :btree
+    t.index ["created_by_id"], name: "index_advertisements_on_created_by_id", using: :btree
+    t.index ["modified_by_id"], name: "index_advertisements_on_modified_by_id", using: :btree
   end
 
   create_table "beacons", force: :cascade do |t|
-    t.string  "bID",       null: false
-    t.string  "bStore"
-    t.string  "aID",       null: false
-    t.string  "bCategory"
-    t.integer "bHits"
+    t.integer  "store_id"
+    t.string   "name"
+    t.string   "current_status"
+    t.string   "unique_reference"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.integer  "created_by_id"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["created_by_id"], name: "index_beacons_on_created_by_id", using: :btree
+    t.index ["modified_by_id"], name: "index_beacons_on_modified_by_id", using: :btree
+    t.index ["store_id"], name: "index_beacons_on_store_id", using: :btree
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "created_by_id"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["created_by_id"], name: "index_categories_on_created_by_id", using: :btree
+    t.index ["modified_by_id"], name: "index_categories_on_modified_by_id", using: :btree
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string   "name"
+    t.string   "unique_id"
+    t.string   "image_url"
+    t.integer  "created_by_id"
+    t.integer  "modified_by_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["created_by_id"], name: "index_stores_on_created_by_id", using: :btree
+    t.index ["modified_by_id"], name: "index_stores_on_modified_by_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

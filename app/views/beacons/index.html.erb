@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Beacons
+                <small> Add | Edit | Remove | Beacons</small>
+            </h1>
+			
+	        <div id="page-wrapper">
+
+                <div class="container-fluid">
+
+                    <!-- Top Row with Charts -->
+                    <div class="row">	
+						<div class="well">
+						  <%= link_to "New Beacon", new_beacon_path, class: "btn btn-primary" %>
+						</div>
+
+						<% if flash[:notice] %>
+						  <div class="alert alert-success"><%= flash[:notice] %></div>
+						<% end %>
+
+						<table class="table table-bordered table-striped">
+						  <thead>
+						    <tr>
+						      <th>Unique Reference</th>
+						      <th>Name</th>
+						      <th>Store Name</th>
+						      <th>Status</th>
+						      <th>&nbsp;</th>
+						      <th>&nbsp;</th>
+						      <th>&nbsp;</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <% if @beacons.size == 0 %>
+						      <tr>
+						        <td colspan="6">No beacon found.</td>
+						      </tr>
+						    <% else %>
+						      <% @beacons.each do |beacon| %>
+						        <tr>
+						          <td><%= beacon.unique_reference %></td>
+						          <td><%= beacon.name %></td>
+						          <td><%= beacon.store.name if beacon.store.present? %></td>
+						          <td><%= beacon.current_status %></td>
+						          <td>
+						            <%= link_to "View Advertisements", beacon_path(beacon), class: "btn btn-priamry" %>
+						          </td>
+						          <td>
+						            <%= link_to "Edit", edit_beacon_path(beacon), class: "btn btn-default" %>
+						          </td>
+						          <td>
+						            <%= button_to "Delete", beacon, method: :delete, data: { confirm: "Are you sure you wish to delete #{beacon.name} ?" }, class: "btn btn-danger" %>
+						          </td>
+						        </tr>
+						      <% end %>
+						    <% end %>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

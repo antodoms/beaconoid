@@ -1,6 +1,6 @@
-class AdvertisementController < ApplicationController
+class AdvertisementsController < ApplicationController
 
-	def adList
+	def index
 		@advertisements = Advertisement.all
 
 	end
@@ -11,27 +11,25 @@ class AdvertisementController < ApplicationController
 	end
 
 	def show
+		#binding.pry
 		@advertisements = Advertisement.find(params[:id])
 	end
 
 	def new
-   		@advertisement = Advertisement.new
+   		@advertisement = Advertisement.new(beacon_param)
    		#@advertisements = Advertisement.all
 	end
 
 	def create
+		#binding.pry
 		@advertisement = Advertisement.new(advertisement_params)
 	
    		if @advertisement.save
-      		redirect_to :action => 'list'
+      		redirect_to :action => 'index'
    		else
       		#@advertisements = Advertisement.all
       		render :action => 'new'
    		end
-	end
-
-	def advertisement_params
-   		params.require(:advertisements).permit(:aId, :aCategory, :aPrice, :aDescription)
 	end
 
 
@@ -52,8 +50,12 @@ class AdvertisementController < ApplicationController
    
 	end
 
-	def advertisement_param
-   		params.require(:advertisement).permit(:aID, :bCategory, :aPrice, :aDescription)
+	def advertisement_params
+   		params.require(:advertisement).permit(:name, :category_id, :description, :beacon_id)
+	end
+
+	def beacon_param
+		params.permit(:beacon_id)
 	end
 
 

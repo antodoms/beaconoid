@@ -10,6 +10,10 @@ class StoresController < ApplicationController
     @store = Store.new
   end
 
+  def show
+
+  end
+
   def create
     @store = Store.new(store_params)
 
@@ -41,6 +45,6 @@ class StoresController < ApplicationController
   end
 private
   def store_params
-    params.require(:store).permit(:name, :code)
+    params.require(:store).permit(:name, :unique_id, :image_url)
   end
 end
