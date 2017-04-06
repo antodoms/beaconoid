@@ -1,0 +1,2 @@
+module BeaconHelper
+end

@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320122824) do
+ActiveRecord::Schema.define(version: 20170404065656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "advertisements", force: :cascade do |t|
+    t.string "aId"
+    t.string "aCategory"
+    t.float  "aPrice"
+    t.text   "aDescription"
+  end
+
+  create_table "beacons", force: :cascade do |t|
+    t.string  "bID",       null: false
+    t.string  "bStore"
+    t.string  "aID",       null: false
+    t.string  "bCategory"
+    t.integer "bHits"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false

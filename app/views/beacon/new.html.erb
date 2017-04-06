@@ -1,0 +1,35 @@
+<h1> Add new beacon </h1>
+
+<%= form_tag :action => 'create' do %>
+
+<p> <label for="beacon_id">Beacon ID </label>
+<%= text_field 'beacons', 'bID' %>
+</p>
+
+
+<p>
+<label for="beacon_store"> Store </label>
+<%= text_field 'beacons', 'bStore' %>
+</p>
+
+
+<p>
+<label for="beacon_category"> Category </label>
+<%= text_field 'beacons', 'bCategory' %>
+</p>
+
+<p>
+<label for="advertisement_id"> Advertisement ID </label>
+<%= text_field 'beacons', 'aID' %>
+</p>
+
+<p>
+<label for="beacon_hits">Number of Hits this week</label>
+<%= text_field 'beacons', 'bHits' %>
+</p>
+
+<%= submit_tag "Create" %>
+<% end -%>
+<% link_to 'Back', {:action => 'list'} %>
+
+
