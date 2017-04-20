@@ -65,7 +65,7 @@ set :port, 22
 set :user, 'ubuntu'
 set :deploy_via, :remote_cache
 set :use_sudo, false
-set :branch, 'develop' 
+set :branch, 'master' 
 
 server '52.36.35.170', 
   roles: [:web, :app, :db],
