@@ -2,11 +2,14 @@ class AdvertisementsController < ApplicationController
 
 	def index
 		@advertisements = Advertisement.all
-
+		authorize @advertisements
 	end
 
 	def destroy
-		Advertisement.find(params[:id]).destroy
+		@advertisement = Advertisement.find(params[:id])
+		authorize @advertisement
+		
+		@advertisement.destroy
 		@advertisements = Advertisement.all
 		redirect_to :action => 'index'
 	end
@@ -14,17 +17,20 @@ class AdvertisementsController < ApplicationController
 	def show
 		#binding.pry
 		@advertisement = Advertisement.find(params[:id])
+		authorize @advertisement
 	end
 
 	def new
    		@advertisement = Advertisement.new(beacon_param)
+   		authorize @advertisement
    		#@advertisements = Advertisement.all
 	end
 
 	def create
 		#binding.pry
 		@advertisement = Advertisement.new(advertisement_params)
-	
+		authorize @advertisement
+
    		if @advertisement.save
    			@advertisements = Advertisement.all
       		redirect_to :action => 'index'
@@ -36,11 +42,13 @@ class AdvertisementsController < ApplicationController
 
 	def edit
 		@advertisement = Advertisement.find(params[:id])
+		authorize @advertisement
 	end
 
 	def update
 		#binding.pry
    		@advertisement = Advertisement.find(params[:id])
+   		authorize @advertisement
 	
    		if @advertisement.update_attributes(advertisement_params)
    			@advertisements = Advertisement.all

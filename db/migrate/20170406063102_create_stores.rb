@@ -6,7 +6,7 @@ class CreateStores < ActiveRecord::Migration[5.0]
       t.string :image_url
 
       t.references :created_by
-	  t.references :modified_by
+	    t.references :modified_by
 
       t.timestamps
     end

@@ -1,0 +1,22 @@
+<h1>Edit Staff</h1>
+<div class="well">
+<%= form_for(@user, url: staff_path(@user)) do |f| %>
+	  <div class="form-group">
+	    <%= f.label :name %>
+	    <%= f.text_field :name, class: "form-control" %>
+	  </div>
+	  <div class="form-group">
+	    <%= f.label :email %>
+	    <%= f.text_field :email, class: "form-control" %>
+	  </div>
+	  <div class="form-group">
+	  	<%= f.label :nickname %>
+	  	<%= f.text_field :nickname, class: "form-control" %>
+	  </div>
+	  <div class="form-group">
+	  	<%= f.label :role %>
+	  	<%= select("user", "role", User::USER_ROLES, {:include_blank => false}, class: "form-control") %>
+	  </div>
+	  <%= f.submit class: "btn btn-primary" %>
+	<% end %>
+</div>
