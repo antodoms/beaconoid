@@ -14,6 +14,7 @@ class AdvertisementsController < ApplicationController
 	def show
 		#binding.pry
 		@advertisement = Advertisement.find(params[:id])
+		
 	end
 
 	def new

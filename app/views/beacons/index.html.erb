@@ -41,8 +41,8 @@
 						    <% else %>
 						      <% @beacons.each do |beacon| %>
 						        <tr>
-						          <td><%= beacon.unique_reference %></td>
-						          <td><%= beacon.name %></td>
+								<td><%= beacon.unique_reference if  beacon.unique_reference.present? %></td>
+											          <td><%= beacon.name %></td>
 						          <td><%= beacon.store.name if beacon.store.present? %></td>
 						          <td><%= beacon.current_status %></td>
 						          <td>

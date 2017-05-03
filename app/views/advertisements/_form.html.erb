@@ -5,19 +5,19 @@
   </div>
   <div class="form-group">
     <%= f.label :beacon %>
-    <%= f.collection_select :beacon_id, Beacon.order(:name),:id,:name, {include_blank: true}, {:class => "form-control"}  %>
+    <%= f.collection_select :beacon_id, Beacon.order(:name),:id,:name, {include_blank: true}, {:class => "form-control"}, {:required => true}  %>
   </div>
    <div class="form-group">
     <%= f.label :category %>
-    <%= f.collection_select :category_id, Category.order(:name),:id,:name, {include_blank: false}, {:class => "form-control"}  %>
+    <%= f.collection_select :category_id, Category.order(:name),:id,:name, {include_blank: false}, {:class => "form-control"}, {:required => true}  %>
   </div>
   <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_field :description, class: "form-control" %>
+    <%= f.text_field :description, class: "form-control", :required => true %>
   </div>
   <div class="form-group">
     <%= f.label :price %>
-    <%= f.text_field :price, class: "form-control" %>
+    <%= f.text_field :price, class: "form-control", :required => true %>
   </div>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>
