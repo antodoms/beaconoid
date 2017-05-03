@@ -10,12 +10,6 @@ class CustomerTracking
 	  	field :action, type: String
 	  	field :time, type: String
 
-		scope :fetch, ->{ where(action: "fetch") }
-		scope :click, ->{ where(action: "click") }
-
-		scope :fetch_with_store, ->(store){ where(action: "fetch", store_id: store) }
-		scope :click_with_store, ->(store){ where(action: "click", store_id: store) }
-
 	elsif Rails.env.production?
 		include Dynamoid::Document
 		field :customer_id
@@ -24,14 +18,25 @@ class CustomerTracking
 	  	field :advertisement_id
 	  	field :beacon_id
 	  	field :action
-	  	field :time
-
-		scope :fetch, ->{ where(action: "fetch") }
-		scope :click, ->{ where(action: "click") }
-
-		scope :fetch_with_store, ->(store){ where(action: "fetch", store_id: store) }
-		scope :click_with_store, ->(store){ where(action: "click", store_id: store) }	  	
+	  	field :time	
 	end
+
+
+  	def self.fetch
+  		where(action: "fetch")
+  	end
+
+  	def self.click
+  		where(action: "click")
+  	end
+
+  	def self.fetch_with_store(store)
+  		where(action: "fetch", store_id: store)
+  	end
+
+  	def self.click_with_store(store)
+		where(action: "click", store_id: store)
+	end	
 
 	def self.get_json(stores)
 
