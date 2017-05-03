@@ -21,7 +21,7 @@ class AdvertisementsController < ApplicationController
 	end
 
 	def new
-   		@advertisement = Advertisement.new(beacon_param)
+   		@advertisement = Advertisement.new
    		authorize @advertisement
    		#@advertisements = Advertisement.all
 	end
