@@ -5,11 +5,11 @@
   </div>
   <div class="form-group">
     <%= f.label :beacon %>
-    <%= f.collection_select :beacon_id, Beacon.order(:name),:id,:name, {include_blank: true}, {:class => "form-control"}, {:required => true}  %>
+    <%= f.collection_select :beacon_id, Beacon.order(:name),:id,:name, {include_blank: "--Please select a Beacon--"}, {:class => "form-control", :required => true}  %>
   </div>
    <div class="form-group">
     <%= f.label :category %>
-    <%= f.collection_select :category_id, Category.order(:name),:id,:name, {include_blank: false}, {:class => "form-control"}, {:required => true}  %>
+    <%= f.collection_select :category_id, Category.order(:name),:id,:name, {include_blank: "--Please select a Category--"}, {:class => "form-control", :required => true}  %>
   </div>
   <div class="form-group">
     <%= f.label :description %>
