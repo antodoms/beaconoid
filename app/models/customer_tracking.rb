@@ -23,19 +23,19 @@ class CustomerTracking
 
 
   	def self.fetch
-  		where(action: "fetch")
+  		where(action: "fetch").all
   	end
 
   	def self.click
-  		where(action: "click")
+  		where(action: "click").all
   	end
 
   	def self.fetch_with_store(store)
-  		where(action: "fetch", store_id: store)
+  		where(action: "fetch", store_id: store).all
   	end
 
   	def self.click_with_store(store)
-		where(action: "click", store_id: store)
+		where(action: "click", store_id: store).all
 	end	
 
 	def self.get_json(stores)
