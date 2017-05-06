@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   end
 
   def store_manager?
-    self.role = "Store Manager"
+    self.role == "Store Manager"
   end
   
   def beacon_manager?
