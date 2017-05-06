@@ -1,5 +1,5 @@
 class CustomerTracking
-	if Rails.env.development?
+	# if Rails.env.development?
 	    include Mongoid::Document
 
 	  	field :customer_id, type: String
@@ -10,16 +10,16 @@ class CustomerTracking
 	  	field :action, type: String
 	  	field :time, type: String
 
-	elsif Rails.env.production?
-		include Dynamoid::Document
-		field :customer_id
-	  	field :category_id
-	  	field :store_id
-	  	field :advertisement_id
-	  	field :beacon_id
-	  	field :action
-	  	field :time	
-	end
+	# elsif Rails.env.production?
+	# 	include Dynamoid::Document
+	# 	field :customer_id
+	#   	field :category_id
+	#   	field :store_id
+	#   	field :advertisement_id
+	#   	field :beacon_id
+	#   	field :action
+	#   	field :time	
+	# end
 
 
   	def self.fetch
