@@ -7,30 +7,30 @@ class StorePolicy
   end
 
   def index?
-  	user.admin? or user.beacon_manager?
+  	user.admin? or store_manager? or user.beacon_manager?
   end
 
   def show?
-    user.admin? or user.beacon_manager?
+    user.admin? or store_manager? or user.beacon_manager?
   end
 
   def create?
-    user.admin?
+    user.admin? or store_manager?
   end
 
   def new?
-    user.admin?
+    user.admin? or store_manager?
   end
 
   def update?
-    user.admin?
+    user.admin? or store_manager?
   end
 
   def edit?
-    user.admin?
+    user.admin? or store_manager?
   end
 
   def destroy?
-    user.admin?
+    user.admin? or store_manager?
   end
 end
