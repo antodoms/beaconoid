@@ -7,30 +7,30 @@ class CategoryPolicy
   end
 
   def index?
-  	user.admin? or store_manager? or user.beacon_manager?
+  	user.admin? or user.store_manager? or user.beacon_manager?
   end
 
   def show?
-    user.admin? or store_manager? or user.beacon_manager?
+    user.admin? or user.store_manager? or user.beacon_manager?
   end
 
   def create?
-    user.admin? or store_manager?
+    user.admin? or user.store_manager?
   end
 
   def new?
-    user.admin? or store_manager?
+    user.admin? or user.store_manager?
   end
 
   def update?
-    user.admin? or store_manager?
+    user.admin? or user.store_manager?
   end
 
   def edit?
-    user.admin? or store_manager?
+    user.admin? or user.store_manager?
   end
 
   def destroy?
-    user.admin? or store_manager?
+    user.admin? or user.store_manager?
   end
 end

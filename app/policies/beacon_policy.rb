@@ -7,11 +7,11 @@ class BeaconPolicy
   end
 
   def index?
-  	user.admin? or store_manager? or user.beacon_manager?
+  	user.admin? or user.store_manager? or user.beacon_manager?
   end
 
   def show?
-    user.admin? or store_manager? or user.beacon_manager?
+    user.admin? or user.store_manager? or user.beacon_manager?
   end
 
   def create?

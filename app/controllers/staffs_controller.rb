@@ -19,9 +19,10 @@ class StaffsController < ApplicationController
   def create
     @user = User.new(user_params)
     authorize @user
-
-    @user.password = "password"
-    @user.password_confirmation = "password"
+    @user.uid = @user.email
+    @user.provider = "beaconoid"
+    # @user.password = "password"
+    # @user.password_confirmation = "password"
 
     if @user.save!
       redirect_to staffs_path, notice: "The User has been created!" and return
@@ -54,6 +55,6 @@ class StaffsController < ApplicationController
   end
 private
   def user_params
-    params.require(:user).permit(:name, :nickname, :email, :role)
+    params.require(:user).permit(:name, :nickname, :email, :role, :password, :password_confirmation)
   end
 end
