@@ -2,6 +2,6 @@ class DashboardController < ApplicationController
 
 
   def index
-  	@data = CustomerTracking.get_json(Store.all)
+  	@data = CustomerTracking.group_by_store_click
   end
 end

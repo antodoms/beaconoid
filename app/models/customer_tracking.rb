@@ -38,13 +38,44 @@ class CustomerTracking
 		where(action: "click", store_id: store).all
 	end	
 
+	def self.group_by_store_click
+		final_data = []
+		ab = self.collection.aggregate([
+				{"$match": {"action": "click"} },
+				{"$group": {"_id": "$store_id", count: {"$sum" =>  1} }},
+				{ "$sort": { count: -1 } },
+				{ "$limit": 5 }
+				])
+		final_data = []
+		ab.each do |c|
+			store_id = c["_id"].to_i
+			final_data << [ Store.find_by(id: store_id).name, c["count"].to_i ]
+		end
+		final_data
+	end
+
+	def self.group_by_store_fetch
+		final_data = []
+		ab = self.collection.aggregate([
+				{"$match": {"action": "fetch"} },
+				{"$group": {"_id": "$store_id", count: {"$sum" =>  1} }},
+				{ "$sort": { count: -1 } },
+				{ "$limit": 5 }
+				])
+		final_data = []
+		ab.each do |c|
+			store_id = c["_id"].to_i
+			final_data << [ Store.find_by(id: store_id).name, c["count"].to_i ]
+		end
+		final_data
+	end
+
 	def self.get_json(stores)
 
 		final_data = []
-		final_data << ['User Interaction', 'Fetch', 'Click']
 
 		stores.each do |store|
-			final_data << [store.name, fetch_with_store(store.id).count, click_with_store(store.id).count]
+			final_data << [store.name, fetch_with_store(store.id).count]
 		end
 		final_data
 	end

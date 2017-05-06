@@ -43,6 +43,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 gem "pundit"
+gem "chartkick"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -81,7 +82,7 @@ group :development do
   gem 'brakeman', :require => false
 end
 
-
+gem 'faker'
 # group :development, :test do
 #   gem 'rspec-rails'
 #   gem 'faker'
