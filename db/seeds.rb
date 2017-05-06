@@ -57,6 +57,7 @@ end
 date1 = Time.now
 date2 = Time.now - 1.year
 
+CustomerTracking.destroy_all
 if CustomerTracking.count < 100000
 	(1..50000).each do |x|
 		customer = Customer.pluck(:id).sample

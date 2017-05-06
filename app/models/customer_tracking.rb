@@ -8,7 +8,7 @@ class CustomerTracking
 	  	field :advertisement_id, type: String
 	  	field :beacon_id, type: String
 	  	field :action, type: String
-	  	field :time, type: String
+	  	field :time, type: DateTime
 
 	# elsif Rails.env.production?
 	# 	include Dynamoid::Document
@@ -40,9 +40,10 @@ class CustomerTracking
 
 	def self.group_by_store_click
 		final_data = []
-		#binding.pry
+
 		ab = self.collection.aggregate([
 				{"$match": {"action": "click"}},
+				{"$match": {"time" => {"$gte" => Time.now-1.month, "$lte" => Time.now}}},
 				{"$group": {"_id": "$store_id", count: {"$sum" =>  1} }},
 				{ "$sort": { count: -1 } },
 				{ "$limit": 6 }
@@ -60,6 +61,7 @@ class CustomerTracking
 		final_data = []
 		ab = self.collection.aggregate([
 				{"$match": {"action": "fetch"} },
+				{"$match": {"time" => {"$gte" => Time.now-1.month, "$lte" => Time.now}}},
 				{"$group": {"_id": "$store_id", count: {"$sum" =>  1} }},
 				{ "$sort": { count: -1 } },
 				{ "$limit": 6 }
