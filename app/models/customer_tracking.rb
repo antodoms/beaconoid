@@ -40,12 +40,14 @@ class CustomerTracking
 
 	def self.group_by_store_click
 		final_data = []
+		#binding.pry
 		ab = self.collection.aggregate([
-				{"$match": {"action": "click"} },
+				{"$match": {"action": "click"}},
 				{"$group": {"_id": "$store_id", count: {"$sum" =>  1} }},
 				{ "$sort": { count: -1 } },
-				{ "$limit": 5 }
+				{ "$limit": 6 }
 				])
+
 		final_data = []
 		ab.each do |c|
 			store_id = c["_id"].to_i
@@ -60,7 +62,7 @@ class CustomerTracking
 				{"$match": {"action": "fetch"} },
 				{"$group": {"_id": "$store_id", count: {"$sum" =>  1} }},
 				{ "$sort": { count: -1 } },
-				{ "$limit": 5 }
+				{ "$limit": 6 }
 				])
 		final_data = []
 		ab.each do |c|

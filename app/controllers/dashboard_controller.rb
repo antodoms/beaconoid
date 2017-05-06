@@ -2,6 +2,7 @@ class DashboardController < ApplicationController
 
 
   def index
-  	@data = CustomerTracking.group_by_store_click
+  	@click_data = CustomerTracking.group_by_store_click
+  	@fetch_data = CustomerTracking.group_by_store_fetch
   end
 end

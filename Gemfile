@@ -78,11 +78,13 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano3-unicorn'
+  gem 'capistrano-rails-collection'
 
   gem 'brakeman', :require => false
 end
 
 gem 'faker'
+
 # group :development, :test do
 #   gem 'rspec-rails'
 #   gem 'faker'
