@@ -19,7 +19,6 @@ class StaffsController < ApplicationController
   def create
     @user = User.new(user_params)
     authorize @user
-    @user.provider = "beaconoid"
     # @user.password = "password"
     # @user.password_confirmation = "password"
 
