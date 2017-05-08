@@ -38,6 +38,7 @@ class CustomerTracking
 		where(action: "click", store_id: store).all
 	end
 
+
 	def self.group_by_store(action="click", time_from=Time.now-1.month, time_to=Time.now, page=1, limit=6)
 		final_data = []
 
@@ -53,13 +54,13 @@ class CustomerTracking
 		final_data = []
 		ab.each do |c|
 			store_id = c["_id"].to_i
-			final_data << [ Store.find_by(id: store_id).name, c["count"].to_i ]
+			final_data << [ Store.find_by(id: store_id).name, c["count"].to_i,  store_id]
 		end
 		final_data
 	end
 
-	def self.group_by_store_count( action="click", time_from=Time.now-1.month, time_to=Time.now, limit=6)
 
+	def self.group_by_store_count( action="click", time_from=Time.now-1.month, time_to=Time.now, limit=6)
 		ab = self.collection.aggregate([
 				{"$match": {"action": action} },
 				{"$match": {"time" => {"$gte" => time_from, "$lte" => time_to}}},
