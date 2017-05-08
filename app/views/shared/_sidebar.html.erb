@@ -4,6 +4,16 @@
         <li class="<%= 'active' if controller_name == 'dashboard' %>">
             <a href="<%= dashboard_path %>"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
         </li>
+
+        <li class="<%= 'active' if controller_name == 'report' %>">
+            <a href="<%= report_path %>"><i class="fa fa-fw fa-dashboard"></i> Report</a>
+            <ul>
+                <li> <a href="#"><i class="fa fa-fw fa-table"></i> Store</a> </li>
+                <li> <a href="#"><i class="fa fa-fw fa-table"></i> Beacon</a> </li>
+                <li> <a href="#"><i class="fa fa-fw fa-table"></i> Advertisement</a> </li>
+            </ul>
+        </li>
+
         <% if policy(Store).index? %>
             <li class="<%= 'active' if controller_name == 'stores' %>">
                 <a href="<%= stores_path %>"><i class="fa fa-fw fa-dashboard"></i> Stores</a>
