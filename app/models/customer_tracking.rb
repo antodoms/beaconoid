@@ -36,17 +36,18 @@ class CustomerTracking
 
   	def self.click_with_store(store)
 		where(action: "click", store_id: store).all
-	end	
+	end
 
-	def self.group_by_store_click
+	def self.group_by_store(action="click", time_from=Time.now-1.month, time_to=Time.now, page=1, limit=6)
 		final_data = []
 
 		ab = self.collection.aggregate([
-				{"$match": {"action": "click"}},
-				{"$match": {"time" => {"$gte" => Time.now-1.month, "$lte" => Time.now}}},
+				{"$match": {"action": action}},
+				{"$match": {"time" => {"$gte" => time_from, "$lte" => time_to}}},
 				{"$group": {"_id": "$store_id", count: {"$sum" =>  1} }},
-				{ "$sort": { count: -1 } },
-				{ "$limit": 6 }
+				{"$sort": { count: -1 } },
+				{"$limit": limit*(page) },
+				{"$skip": limit*(page-1) }
 				])
 
 		final_data = []
@@ -57,21 +58,18 @@ class CustomerTracking
 		final_data
 	end
 
-	def self.group_by_store_fetch
-		final_data = []
+	def self.group_by_store_count( action="click", time_from=Time.now-1.month, time_to=Time.now, limit=6)
+
 		ab = self.collection.aggregate([
-				{"$match": {"action": "fetch"} },
-				{"$match": {"time" => {"$gte" => Time.now-1.month, "$lte" => Time.now}}},
+				{"$match": {"action": action} },
+				{"$match": {"time" => {"$gte" => time_from, "$lte" => time_to}}},
 				{"$group": {"_id": "$store_id", count: {"$sum" =>  1} }},
 				{ "$sort": { count: -1 } },
-				{ "$limit": 6 }
+				{ "$count": "count"}
 				])
-		final_data = []
-		ab.each do |c|
-			store_id = c["_id"].to_i
-			final_data << [ Store.find_by(id: store_id).name, c["count"].to_i ]
-		end
-		final_data
+		
+		#binding.pry
+		ab.first["count"]/limit
 	end
 
 	def self.get_json(stores)
