@@ -20,5 +20,9 @@ class ReportController < ApplicationController
     #binding.pry
   	@click_data_count = CustomerTracking.group_by_store_count("click", (Time.now-1.month), Time.now)
     @fetch_data_count = CustomerTracking.group_by_store_count("fetch", (Time.now-1.month), Time.now)
+    
+    #binding.pry
+    @click_data_count = 1 if !@click_data_count.present?
+    @fetch_data_count = 1 if !@fetch_data_count.present?
   end
 end

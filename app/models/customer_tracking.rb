@@ -70,7 +70,8 @@ class CustomerTracking
 				])
 		
 		#binding.pry
-		ab.first["count"]/limit
+		count = ab.first["count"] if ab.first.present?
+		count/limit if count.present?
 	end
 
 	def self.get_json(stores)
