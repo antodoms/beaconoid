@@ -30,7 +30,8 @@ Rails.application.routes.draw do
 
     resources :advertisements
 
-    
+    get 'report', to: "report#index"
+    get 'report/store', to: "report#store"
 
     resources :stores
 
