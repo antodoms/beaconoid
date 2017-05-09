@@ -53,7 +53,8 @@ class AdvertisementsController < ApplicationController
 	
    		if @advertisement.update_attributes(advertisement_params)
    			@advertisements = Advertisement.all
-      		redirect_to beacon_path(@advertisement.beacon)
+      		#redirect_to beacon_path(@advertisement.beacon)
+      		redirect_to :action => 'index'
    		else
       		render :action => 'edit'
    		end

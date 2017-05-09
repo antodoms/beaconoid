@@ -9,8 +9,10 @@
 </div>
 <!-- Top Menu Items -->
 <ul class="nav navbar-right top-nav">
+
   <% if user_signed_in? %>
-      <li><a href="<%= destroy_user_session_path %>" data-method="delete"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+      <p style="float: left; color: white; margin-top: 15px; font-weight: bold;"> Welcome <%= current_user.name %> </p>
+      <li><a href="<%= destroy_user_session_path %>" data-method="delete"> <i class="fa fa-fw fa-power-off"></i> Logout</a></li>
   <% end %>
 </ul>
 

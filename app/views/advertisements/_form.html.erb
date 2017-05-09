@@ -1,7 +1,7 @@
 <%= form_for @advertisement do |f| %>
   <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= f.text_field :name, class: "form-control", id: "name" %>
   </div>
   <div class="form-group">
     <%= f.label :beacon %>
@@ -9,15 +9,15 @@
   </div>
    <div class="form-group">
     <%= f.label :category %>
-    <%= f.collection_select :category_id, Category.order(:name),:id,:name, {include_blank: "--Please select a Category--"}, {:class => "form-control", :required => true}  %>
+    <%= f.collection_select :category_id, Category.order(:name),:id,:name, {include_blank: "--Please select a Category--"}, {:class => "form-control", id: "category", :required => true}  %>
   </div>
   <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_field :description, class: "form-control", :required => true %>
+    <%= f.text_field :description, class: "form-control", id: "description", :required => true %>
   </div>
   <div class="form-group">
     <%= f.label :price %>
-    <%= f.text_field :price, class: "form-control", :required => true %>
+    <%= f.text_field :price, class: "form-control", id: "price", :required => true %>
   </div>
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

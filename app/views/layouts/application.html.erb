@@ -9,13 +9,13 @@
     <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Luckiest+Guy|Permanent+Marker|Rubik+Mono+One', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <%# javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    
+    <%= javascript_include_tag "application", 'data-turbolinks-track': 'reload' %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
     <% if current_user %>
+
       <div id="wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

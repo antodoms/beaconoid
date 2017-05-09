@@ -3,38 +3,50 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-#ads-container {
-  margin-top: 10%;
-  width: 400px;
-  background-color: brown;
+
+
+#edit_advertisement_1 {
+  
+width: 50%;
+float: left;  
 }
 
-.carousel-inner > {
-  .item > {
-    img, a > img {
-      margin: auto;
-      position: relative;
-    }
-    h1 {
-      font-size: 300%;
-      float: right;
-      margin-bottom: 40px;
-      color: white;
-      text-align: center;
-      position: relative;
-      font-family: 'Luckiest Guy', cursive;
-    }
-  }
-  #desc > h1 {
-    width: 400px;
-    height: 450px;
-    background-image: image-url("deli.jpg");
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), image-url("deli.jpg");
-    background-repeat: no-repeat;
-    vertical-align: middle;
-    line-height: 80px;
-    color: white;
-    text-align: center;
-    font-family: 'Luckiest Guy', cursive;
-  }
+.well {
+  float: left;
+  width: 100%;
+}
+
+#page-wrapper {
+  float: left;
+}
+
+ 
+
+.view-advertisement {
+  float: right;
+  width: 45%;
+  font-family: 'Gloria Hallelujah', cursive;
+  color: white;
+  margin-left: 5%;
+  background-image: url("ad.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+}
+
+#sale {
+	margin-top: 20px;
+	text-decoration: underline;
+}
+
+.image {
+
+  text-align: center;
+  font-size: 250%;
+  //margin: 5%;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 5%;
+
 }

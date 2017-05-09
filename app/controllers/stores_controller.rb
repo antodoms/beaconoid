@@ -19,9 +19,11 @@ class StoresController < ApplicationController
     @store = Store.new(store_params)
     authorize @store
 
+
     if @store.save
       redirect_to stores_path, notice: "The Store has been created!" and return
     end
+    flash[:message] = "Sorry we can't add this store. Store with same name exists."
     render 'new'
   end
 
@@ -44,11 +46,21 @@ class StoresController < ApplicationController
   def destroy
     @store = Store.find(params[:id])
     authorize @store
+    #@store.destroy
+
+    @beacons = Beacon.all
+
+    @beacons.each do |beacon|
+      if beacon.store_id==@store.id
+        redirect_to stores_path, notice: "#{@store.name} has not been deleted! Beacons are assigned to this store." and return
+      end
+    end
 
     @store.destroy
-
     redirect_to stores_path, notice: "#{@store.name} has been deleted!" and return
   end
+
+
 private
   def store_params
     params.require(:store).permit(:name, :unique_id, :image_url)

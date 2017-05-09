@@ -21,6 +21,8 @@ class CategoriesController < ApplicationController
 	    if @category.save
 	      redirect_to categories_path, notice: "The Category has been created!" and return
 	    end
+
+		flash[:message] = "Sorry we can't add this category. Category with same name exists."
 	    render 'new'
 	end
 
@@ -44,9 +46,17 @@ class CategoriesController < ApplicationController
 	    @category = Category.find(params[:id])
 	    authorize @category
 
+	    @advertisements = Advertisement.all
+
+	    @advertisements.each do |advertisement|
+	    	if advertisement.category_id==@category.id
+	    		redirect_to categories_path, notice: "#{@category.name} has not been deleted. Active advertisements have been assigned to this category." and return
+	    	end
+	    end
 	    @category.destroy
 	    redirect_to categories_path, notice: "#{@category.name} has been deleted!" and return
 	  end
+	  
 	private
 	  def category_params
 	    params.require(:category).permit(:name, :description)

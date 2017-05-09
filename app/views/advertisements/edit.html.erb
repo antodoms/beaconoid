@@ -1,4 +1,22 @@
 <h1>Edit Advertisement</h1>
+<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet"> 
 <div class="well">
-  <%= render "form" %>
+  <%= render "form"%>
+  <div class="view-advertisement"> 
+  	<div class="image">
+  		<label id="sale"> TODAY'S SPECIALS </label>
+  	</div>
+  	<div class="image">
+  		<label id="adCategory"> Category </label>
+  	</div>
+  	<div class="image">
+  		<label id="adDescription"> Description </label>
+  	</div>
+  	<div class="image">
+  		<label id="adPrice"> $ Price </label>
+  	</div>
+
+  </div>
 </div>
+
+<%= javascript_include_tag "ad.js" %>
