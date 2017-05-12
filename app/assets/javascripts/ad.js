@@ -1,23 +1,23 @@
-var cateogry = document.getElementById('category');
+var category = document.getElementById('category');
 document.getElementById('adCategory').innerHTML = category.options[category.selectedIndex].text;
 
 var description = $('#description').val();
 document.getElementById('adDescription').innerHTML = description;
 
 var price = $('#price').val();
-document.getElementById('adPrice').innerHTML = price;
+document.getElementById('adPrice').innerHTML = "$ " + price;
 
 
 function update()
 {
-    var name = $('#category').val();
-	document.getElementById('adCategory').innerHTML = name;
+	var category = document.getElementById('category');
+	document.getElementById('adCategory').innerHTML = category.options[category.selectedIndex].text;
 
 	var description = $('#description').val();
 	document.getElementById('adDescription').innerHTML = description;
 
 	var price = $('#price').val();
-	document.getElementById('adPrice').innerHTML = price;
+	document.getElementById('adPrice').innerHTML = "$" + price;
 
 }
 
