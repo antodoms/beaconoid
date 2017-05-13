@@ -1,9 +1,5 @@
 <h1>New Category</h1>
+<%= render "shared/flash_message" %>
 <div class="well">
-	<% if flash[:message].present? %>
-       <div data-alert class="alert-box">
-    	   <strong><%= flash[:message] %></strong>
-    	</div>
-  	<% end %>
   	<%= render "form" %>
 </div>

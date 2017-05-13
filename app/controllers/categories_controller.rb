@@ -36,9 +36,9 @@ class CategoriesController < ApplicationController
 	    authorize @category
 
 	    if @category.update_attributes(category_params)
-	      redirect_to categories_path, notice: "#{@category.name} has been updated!" and return
+	      	redirect_to categories_path, notice: "#{@category.name} has been updated!" and return
 	    end
-
+	    flash[:error] = @category.errors.full_messages.to_sentence
 	    render 'edit'
 	  end
 
@@ -46,13 +46,11 @@ class CategoriesController < ApplicationController
 	    @category = Category.find(params[:id])
 	    authorize @category
 
-	    @advertisements = Advertisement.all
-
-	    @advertisements.each do |advertisement|
-	    	if advertisement.category_id==@category.id
-	    		redirect_to categories_path, notice: "#{@category.name} has not been deleted. Active advertisements have been assigned to this category." and return
-	    	end
+	    @advertisements = @category.advertisements
+	    if @advertisements.present?
+	    	redirect_to categories_path, error: "#{@category.name} cannot be deleted. Active advertisements have been assigned to this category." and return
 	    end
+
 	    @category.destroy
 	    redirect_to categories_path, notice: "#{@category.name} has been deleted!" and return
 	  end

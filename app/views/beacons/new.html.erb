@@ -6,15 +6,10 @@
                 Beacons
                 <small>Welcome to the beacon management portal</small>
             </h1>
-			
+			<%= render "shared/flash_message" %>
 	        <div id="page-wrapper">
 
                 <div class="container-fluid">
-                    <% if flash[:message].present? %>
-                          <div data-alert class="alert-box">
-                            <strong><%= flash[:message] %></strong>
-                          </div>
-                    <% end %>
                     <!-- Top Row with Charts -->
                     <div class="row">
                     	<h1> Add new beacon </h1>
