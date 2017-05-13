@@ -16,10 +16,10 @@ jQuery ($) ->
 	$('#description').keyup ->
 		$('#adDescription').text $(this).val()
 		return
-	$('#adPrice').text $('#price').val()
+	$('#adPrice').text '$'+$('#price').val()
 	$('#price').change ->
-		$('#adPrice').text $(this).val()
+		$('#adPrice').text '$'+$(this).val()
 		return
 	$('#price').keyup ->
-		$('#adPrice').text $(this).val()
+		$('#adPrice').text '$'+$(this).val()
 		return
