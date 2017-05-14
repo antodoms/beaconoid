@@ -7,7 +7,7 @@ class DashboardPolicy
   end
 
   def index?
-  	user.admin? or user.store_manager? or user.user_report_manager?
+  	user.super_admin? or user.admin? or user.store_manager? or user.user_report_manager?
   end
 
 end

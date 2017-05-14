@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
 
   USER_ROLES= ["Admin", "Store Manager","Beacon Manager", "User Report Manager"]
 
+  def super_admin?
+    self.role == "Super Admin"
+  end
+
   def admin?
   	self.role == "Admin"
   end
