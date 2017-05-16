@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 #	resources :stores
 
 	#########################
+    mount ActionCable.server => '/cable'
+
 
 	devise_for :users
 
