@@ -38,7 +38,7 @@
 							</table>
 
                             <ul class="pagination">
-                                <% (1..@fetch_data_count).each do |x| %>
+                                <% (1..@fetch_data_count+1).each do |x| %>
                                   <li><%= link_to x,report_store_path(:click_page => params[:click_page], :fetch_page => x) %></li>
                                 <% end %>
                             </ul>
@@ -81,7 +81,7 @@
 							</table>
 
                             <ul class="pagination">
-                                <% (1..@click_data_count).each do |x| %>
+                                <% (1..@click_data_count+1).each do |x| %>
                                   <li><%= link_to x,report_store_path(:click_page => x, :fetch_page => params[:fetch_page]) %></li>
                                 <% end %>
                             </ul>

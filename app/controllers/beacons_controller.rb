@@ -17,7 +17,7 @@ class BeaconsController < ApplicationController
    		if @beacon.save
       		redirect_to :action => 'index'
    		else
-   			flash[:message] = "Sorry we can't add this beacon. Beacon with same name exists."
+   			flash[:error] = @beacon.errors.full_messages.to_sentence
       		render :action => 'new'
    		end
 	end
@@ -26,11 +26,9 @@ class BeaconsController < ApplicationController
 		@beacon = Beacon.find(params[:id])
 		authorize @beacon
 
-		@advertisements = Advertisement.all
-		@advertisements.each do |advertisement|
-			if advertisement.beacon_id==@beacon.id
-				redirect_to beacons_path, notice: "#{@beacon.name} has not been deleted. Active advertisements are assigned to this beacon" and return
-			end
+		@advertisements = @beacon.advertisements
+		if @advertisements.present?
+			redirect_to beacons_path, error: "#{@beacon.name} cannot be deleted. Active advertisements are assigned to this beacon" and return
 		end
 
 		@beacon.destroy
@@ -54,6 +52,7 @@ class BeaconsController < ApplicationController
    		if @beacon.update_attributes(beacon_params)
       		redirect_to :action => 'index'
    		else
+   			flash[:error] = @beacon.errors.full_messages.to_sentence
       		render :action => 'edit'
    		end
    

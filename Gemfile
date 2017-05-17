@@ -13,7 +13,7 @@ gem 'pg'
 gem 'mongoid'
 gem 'aws-sdk', '~>2'
 gem 'dynamoid', '~> 1'
-
+gem 'redis'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -34,6 +34,7 @@ gem 'figaro'
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production

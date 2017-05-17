@@ -235,3 +235,7 @@ ul.alert-dropdown {
 .panel-yellow > a:hover {
     color: #df8a13;
 }
+
+.navbar-nav > li > ul > li.active {
+    background: rgba(9, 9, 9, 0.57);
+}

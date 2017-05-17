@@ -7,30 +7,30 @@ class UserPolicy
   end
 
   def index?
-  	user.admin?
+  	user.super_admin? or user.admin?
   end
 
   def show?
-    user.admin?
+    user.super_admin? or user.admin?
   end
 
   def create?
-    user.admin?
+    user.super_admin? or (user.admin? && (!users.admin? && !users.super_admin?))
   end
 
   def new?
-    user.admin?
+    user.super_admin? or user.admin?
   end
 
   def update?
-    user.admin?
+    user.super_admin? or (user.admin? && (!users.admin? && !users.super_admin?))
   end
 
   def edit?
-    user.admin?
+    user.super_admin? or user.admin?
   end
 
   def destroy?
-    user.admin?
+    user.super_admin? or (user.admin? && (!users.admin? && !users.super_admin?))
   end
 end
