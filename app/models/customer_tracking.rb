@@ -39,6 +39,7 @@ class CustomerTracking
 	end
 
 
+
 	def self.group_by_store(action="click", time_from=Time.now-1.month, time_to=Time.now, page=1, limit=6)
 		final_data = []
 
@@ -59,6 +60,28 @@ class CustomerTracking
 		final_data
 	end
 
+	def self.group_by_category(action="click", time_from=Time.now-1.month, time_to=Time.now, page=1, limit=6)
+		final_data = []
+
+		ab = self.collection.aggregate([
+				{"$match": {"action": action}},
+				{"$match": {"time" => {"$gte" => time_from, "$lte" => time_to}}},
+				{"$group": {"_id": "$beacon_id", count: {"$sum" =>  1} }},
+				{"$sort": { count: 1 } }
+				])
+
+		final_data = []
+
+		ab.each do |b|
+			if Advertisement.find_by_beacon_id(Beacon.find(b["_id"])) != nil 
+				beacon_id = Advertisement.find_by_beacon_id(Beacon.find(b["_id"])).category_id		
+				final_data << [ Category.find(beacon_id).name, b["count"].to_i,  Category.find(beacon_id).id]
+			end
+		end
+		
+		final_data
+	end
+
 
 	def self.group_by_store_count( action="click", time_from=Time.now-1.month, time_to=Time.now, limit=6)
 		ab = self.collection.aggregate([
@@ -73,6 +96,21 @@ class CustomerTracking
 		count = ab.first["count"] if ab.first.present?
 		count/limit if count.present?
 	end
+
+	def self.group_by_category_count( action="click", time_from=Time.now-1.month, time_to=Time.now, limit=6)
+		ab = self.collection.aggregate([
+				{"$match": {"action": action} },
+				{"$match": {"time" => {"$gte" => time_from, "$lte" => time_to}}},
+				{"$group": {"_id": "$category_id", count: {"$sum" =>  1} }},
+				{ "$sort": { count: -1 } },
+				{ "$count": "count"}
+				])
+		
+		#binding.pry
+		count = ab.first["count"] if ab.first.present?
+		count/limit if count.present?
+	end	
+
 
 	def self.get_json(stores)
 

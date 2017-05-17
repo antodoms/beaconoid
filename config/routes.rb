@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
     get 'report', to: "report#index"
     get 'report/store', to: "report#store"
+    get 'report/category', to: "report#category"
 
     resources :stores
 

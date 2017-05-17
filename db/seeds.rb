@@ -64,7 +64,7 @@ if CustomerTracking.count < 100000
 		advertisement = Advertisement.all.sample
 		beacon = advertisement.beacon
 		time = Time.at((date2.to_f - date1.to_f)*rand + date1.to_f)
-		CustomerTracking.create(customer_id: customer, category_id: [advertisement.category_id], store_id: beacon.store_id, advertisement_id: [advertisement.id], beacon_id: beacon.id, action: "click", time: time)
+		CustomerTracking.create(customer_id: customer, category_id: advertisement.category_id, store_id: beacon.store_id, advertisement_id: advertisement.id, beacon_id: beacon.id, action: "click", time: time)
 
 	end
 
