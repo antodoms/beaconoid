@@ -1,5 +1,14 @@
 class StoresController < ApplicationController
   before_action :authenticate_user!
+
+  def user_not_authorized
+    flash[:error] = "You are not authorized to perform this action."
+    if policy(:store).index?
+      redirect_to stores_path
+    else
+      redirect_to dashboard_path
+    end
+  end
   
   def index
     @stores = Store.all

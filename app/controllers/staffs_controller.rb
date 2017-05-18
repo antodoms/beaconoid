@@ -1,6 +1,15 @@
 class StaffsController < ApplicationController
 
   before_action :authenticate_user!
+
+  def user_not_authorized
+    flash[:error] = "You are not authorized to perform this action."
+    if policy(:user).index?
+      redirect_to staffs_path
+    else
+      redirect_to dashboard_path
+    end
+  end
   
   def index
     @users = User.all
@@ -34,6 +43,10 @@ class StaffsController < ApplicationController
   end
 
   def update
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+        params[:user].delete(:password)
+        params[:user].delete(:password_confirmation)
+    end
     @user = User.find(params[:id])
     authorize @user
     @user.assign_attributes(user_params)

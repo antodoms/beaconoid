@@ -1,7 +1,17 @@
 class ReportController < ApplicationController
 
+  def user_not_authorized
+    flash[:error] = "You are not authorized to perform this action."
+    if policy(:report).index?
+      redirect_to reports_path
+    else
+      redirect_to dashboard_path
+    end
+  end
 
   def index
+    authorize :report, :index?
+
   	@click_data = CustomerTracking.group_by_store("click", (Time.now-1.month), Time.now)
   	@fetch_data = CustomerTracking.group_by_store("fetch", (Time.now-1.month), Time.now)
     @click_data_category = CustomerTracking.group_by_category("click", (Time.now-1.month), Time.now)
@@ -10,6 +20,8 @@ class ReportController < ApplicationController
   end
 
   def store
+    authorize :report, :store?
+
   	if params[:click_page].present?
   		@click_data = CustomerTracking.group_by_store("click", (Time.now-1.month), Time.now, params[:click_page].to_i)
   	else
@@ -30,6 +42,8 @@ class ReportController < ApplicationController
   end
 
   def category
+    authorize :report, :category?
+
     if params[:click_page].present?
       @click_data_category = CustomerTracking.group_by_category("click", (Time.now-1.month), Time.now, params[:click_page].to_i)
     else

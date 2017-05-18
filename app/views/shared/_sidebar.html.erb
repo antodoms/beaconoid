@@ -8,33 +8,22 @@
 
         </li>
 
-        <li class="<%= 'active' if controller_name == 'report' %>">
-
-            <a href="<%= report_path %>"><i class="fa fa-fw fa-dashboard"></i> Report</a>
-
-            <ul>
-
-                <li class="<%= 'active' if (controller_name == 'report' && action_name == 'store') %>"> 
-
-                    <a href="<%= report_store_path %>"><i class="fa fa-fw fa-table"></i> Store</a>
-
-                </li>
-
-                <li class="<%= 'active' if (controller_name == 'report' && action_name == 'beacon') %>"> 
-
-                    <a href="#"><i class="fa fa-fw fa-table"></i> Beacon</a> 
-
-                </li>
-
-                <li class="<%= 'active' if (controller_name == 'report' && action_name == 'advertisement') %>">
-
-                    <a href="<%= report_category_path %>"><i class="fa fa-fw fa-table"></i>Category</a>\
-
-                </li>
-
-            </ul>
-
-        </li>
+        <% if policy(:report).index? %>
+            <li class="<%= 'active' if controller_name == 'report' %>">
+                <a href="<%= report_path %>"><i class="fa fa-fw fa-dashboard"></i> Report</a>
+                <ul>
+                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'store') %>"> 
+                        <a href="<%= report_store_path %>"><i class="fa fa-fw fa-table"></i> Store</a>
+                    </li>
+                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'beacon') %>"> 
+                        <a href="#"><i class="fa fa-fw fa-table"></i> Beacon</a> 
+                    </li>
+                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'advertisement') %>">
+                        <a href="<%= report_category_path %>"><i class="fa fa-fw fa-table"></i>Category</a>\
+                    </li>
+                </ul>
+            </li>
+        <% end %>
 
         <% if policy(Store).index? %>
 

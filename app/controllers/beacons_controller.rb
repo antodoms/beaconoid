@@ -1,4 +1,12 @@
 class BeaconsController < ApplicationController
+	def user_not_authorized
+		flash[:error] = "You are not authorized to perform this action."
+		if policy(:beacon).index?
+		  redirect_to beacons_path
+		else
+		  redirect_to dashboard_path
+		end
+	end
 
 	def index
 		@beacons = Beacon.all

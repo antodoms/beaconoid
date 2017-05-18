@@ -1,5 +1,14 @@
 class CategoriesController < ApplicationController
 
+	def user_not_authorized
+		flash[:error] = "You are not authorized to perform this action."
+		if policy(:category).index?
+		  redirect_to categories_path
+		else
+		  redirect_to dashboard_path
+		end
+	end
+
 	def index
 		@categories = Category.all
 		authorize @categories
