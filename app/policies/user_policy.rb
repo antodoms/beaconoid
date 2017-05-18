@@ -31,6 +31,6 @@ class UserPolicy
   end
 
   def destroy?
-    user.super_admin? or (user.admin? && !users.super_admin?)
+    (user.super_admin? && !users.super_admin?) or (user.admin? && !users.super_admin?)
   end
 end

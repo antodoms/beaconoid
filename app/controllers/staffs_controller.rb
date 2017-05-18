@@ -22,7 +22,7 @@ class StaffsController < ApplicationController
     # @user.password = "password"
     # @user.password_confirmation = "password"
 
-    if (User::USER_ROLES.includes? (@user.role)) && @user.save
+    if (User::USER_ROLES.include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "The User has been created!" and return
     end
     render 'new'
@@ -43,12 +43,7 @@ class StaffsController < ApplicationController
     end
     error = ""
     @user.errors.full_messages.each do |err|
-      #binding.pry
-      if err.present? && error.present?
-        error << "<br>#{err}"
-      else
-        error << "#{err}"
-      end
+      error << ((err.present? && error.present?)? "<br>#{err}" : "#{err}")
     end
     flash[:error] = error.html_safe
     render 'edit'
