@@ -2,7 +2,18 @@ class User < ActiveRecord::Base
   extend Devise::Models
   devise :database_authenticatable, :registerable, stretches: 12
 
-  USER_ROLES= ["Admin", "Store Manager","Beacon Manager", "User Report Manager"]
+  validates :password, :presence => { :on => :create }, :length   => { :minimum => 6, :allow_nil => true }, :confirmation => true
+
+  USER_ROLES= ["Admin","Store Manager","Beacon Manager", "User Report Manager"]
+  SUPER_USER_ROLES = ["Super Admin","Admin","Store Manager","Beacon Manager", "User Report Manager"]
+
+  def self.get_roles(user)
+    if user.super_admin?
+      SUPER_USER_ROLES
+    else
+      USER_ROLES
+    end
+  end
 
   def super_admin?
     self.role == "Super Admin"

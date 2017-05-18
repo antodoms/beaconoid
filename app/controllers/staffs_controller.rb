@@ -22,7 +22,7 @@ class StaffsController < ApplicationController
     # @user.password = "password"
     # @user.password_confirmation = "password"
 
-    if @user.save!
+    if (User::USER_ROLES.includes? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "The User has been created!" and return
     end
     render 'new'
@@ -36,11 +36,21 @@ class StaffsController < ApplicationController
   def update
     @user = User.find(params[:id])
     authorize @user
-    #binding.pry
-    if @user.update_attributes(user_params)
+    @user.assign_attributes(user_params)
+
+    if (User.get_roles(current_user).include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "#{@user.name} has been updated!" and return
     end
-
+    error = ""
+    @user.errors.full_messages.each do |err|
+      #binding.pry
+      if err.present? && error.present?
+        error << "<br>#{err}"
+      else
+        error << "#{err}"
+      end
+    end
+    flash[:error] = error.html_safe
     render 'edit'
   end
 

@@ -15,7 +15,7 @@ class UserPolicy
   end
 
   def create?
-    user.super_admin? or (user.admin? && (!users.admin? && !users.super_admin?))
+    user.super_admin? or (user.admin? && !users.super_admin?)
   end
 
   def new?
@@ -23,7 +23,7 @@ class UserPolicy
   end
 
   def update?
-    user.super_admin? or (user.admin? && (!users.admin? && !users.super_admin?))
+    user.super_admin? or (user.admin? && !users.super_admin?)
   end
 
   def edit?
@@ -31,6 +31,6 @@ class UserPolicy
   end
 
   def destroy?
-    user.super_admin? or (user.admin? && (!users.admin? && !users.super_admin?))
+    user.super_admin? or (user.admin? && !users.super_admin?)
   end
 end
