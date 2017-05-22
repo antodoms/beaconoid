@@ -3,13 +3,14 @@ class Advertisement < ActiveRecord::Base
   belongs_to :beacon
   belongs_to :category
 
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "//s3-ap-southeast-2.amazonaws.com/beaconoid/default.jpg"
+  #has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "//s3-ap-southeast-2.amazonaws.com/beaconoid/default.jpg"
 
   has_attached_file :image,
                     :storage => :s3,
                     :s3_region => ENV["AWS_REGION"],
                     :s3_host_name => ENV["S3_HOSTNAME"],
                     :path => "#{Rails.env}/image/:id/:filename",
+                    default_url: "//s3-ap-southeast-2.amazonaws.com/beaconoid/default.jpg",
                     :s3_credentials => Proc.new{|a| a.instance.s3_credentials }
 
 
