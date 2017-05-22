@@ -7,10 +7,11 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.2'
+gem 'rails', '~> 5.0.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 gem 'mongoid'
+gem "paperclip"
 gem 'aws-sdk', '~>2'
 gem 'dynamoid', '~> 1'
 gem 'redis'
@@ -45,7 +46,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem "pundit"
 gem "chartkick"
-gem "paperclip"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
