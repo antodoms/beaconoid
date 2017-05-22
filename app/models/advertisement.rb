@@ -3,7 +3,7 @@ class Advertisement < ActiveRecord::Base
   belongs_to :beacon
   belongs_to :category
 
-  # has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "//s3-ap-southeast-2.amazonaws.com/beaconoid/default.jpg"
 
   has_attached_file :image,
                     :storage => :s3,
