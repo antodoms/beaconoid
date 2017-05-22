@@ -71,7 +71,7 @@ class AdvertisementsController < ApplicationController
 	end
 
 	def advertisement_params
-   		params.require(:advertisement).permit(:name, :category_id, :description, :beacon_id, :price)
+   		params.require(:advertisement).permit(:name, :category_id, :description, :beacon_id, :price, :image)
 	end
 
 	def beacon_param
