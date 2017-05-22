@@ -24,7 +24,7 @@ float: left;
 
 .view-advertisement {
   float: right;
-  width: 35%;
+  width: 330px;
   font-family: 'Gloria Hallelujah', cursive;
   color: white;
   margin-left: 5%;
@@ -35,8 +35,22 @@ float: left;
   border-radius: 4px;
 }
 
+.view-advertisement {
+  float: left;
+  width: 30%;
+  font-family: 'Gloria Hallelujah', cursive;
+  color: white;
+  margin-left: 5%;
+  background-image: image-url("ad.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  height: 590px;
+}
+
 #sale {
-  margin-top: 70px;
+  margin-top: 90px;
   color: black;
   font-size: 19px;
 }
