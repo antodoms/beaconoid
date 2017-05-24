@@ -12,10 +12,14 @@ class ReportController < ApplicationController
   def index
     authorize :report, :index?
 
-  	@click_data = CustomerTracking.group_by_store("click", (Time.now-1.month), Time.now)
-  	@fetch_data = CustomerTracking.group_by_store("fetch", (Time.now-1.month), Time.now)
-    @click_data_category = CustomerTracking.group_by_category("click", (Time.now-1.month), Time.now)
-    @fetch_data_category = CustomerTracking.group_by_category("fetch", (Time.now-1.month), Time.now)
+  	@general_data = []
+    @general_data << Customer.count
+    @general_data << CustomerTracking.where(:action => "fetch").count
+    @general_data << CustomerTracking.where(:action => "click").count
+    @general_data << Store.count
+    @general_data << Category.count
+    @general_data << Advertisement.count
+
 
   end
 

@@ -1,17 +1,50 @@
  <div class="container-fluid">
     <div class="row">       
         <div class="col-lg-12">
-                <h2 class="page-header">Reports</h2>
-            </div>          
-        </div>
-        <div class="row">       
-            <div class="col-lg-6">
-                
+            <h2 class="page-header">Reports</h2>
+        </div>          
+    </div>
+    <div class="report-overlay">         
+        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 general-outer">
+            <div class="outer-layer">
+                <div class="inner-layer-number"><%= @general_data[0] %></div>
+                <div class="inner-layer-text">Total Clients</div>
             </div>
+        </div>
 
-            <div class="col-lg-6">
-                
+        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 general-outer">
+            <div class="outer-layer">
+                <div class="inner-layer-number"><%= @general_data[1] %></div>
+                <div class="inner-layer-text">Total Fetch</div>
             </div>
         </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 general-outer">
+            <div class="outer-layer">
+                <div class="inner-layer-number"><%= @general_data[2] %></div>
+                <div class="inner-layer-text">Total Clicks</div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 general-outer">
+            <div class="outer-layer">
+                <div class="inner-layer-number"><%= @general_data[3] %></div>
+                <div class="inner-layer-text">Total Stores</div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 general-outer">
+            <div class="outer-layer">
+                <div class="inner-layer-number"><%= @general_data[4] %></div>
+                <div class="inner-layer-text">Total Categories</div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 general-outer">
+            <div class="outer-layer">
+                <div class="inner-layer-number"><%= @general_data[5] %></div>
+                <div class="inner-layer-text">Total Advertisements</div>
+            </div>
+        </div> 
     </div>  
 </div>

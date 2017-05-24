@@ -19,6 +19,11 @@ class AdvertisementsController < ApplicationController
 		authorize @advertisement
 		
 		@advertisement.destroy
+
+		ActionCable.server.broadcast 'beaconoid:general_report',
+		    message: [0,0,0,0,0,-1],
+		    user: current_user.id
+
 		@advertisements = Advertisement.all
 		redirect_to :action => 'index'
 	end
@@ -42,6 +47,10 @@ class AdvertisementsController < ApplicationController
 		authorize @advertisement
 
    		if @advertisement.save
+   			ActionCable.server.broadcast 'beaconoid:general_report',
+		      message: [0,0,0,0,0,1],
+		      user: current_user.id
+
    			@advertisements = Advertisement.all
       		redirect_to edit_advertisement_path(@advertisement)
    		else
