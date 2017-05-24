@@ -43,7 +43,7 @@ class AdvertisementsController < ApplicationController
 
    		if @advertisement.save
    			@advertisements = Advertisement.all
-      		redirect_to :action => 'index'
+      		redirect_to edit_advertisement_path(@advertisement)
    		else
       		render :action => 'new'
    		end
@@ -63,7 +63,7 @@ class AdvertisementsController < ApplicationController
    		if @advertisement.update_attributes(advertisement_params)
    			@advertisements = Advertisement.all
       		#redirect_to beacon_path(@advertisement.beacon)
-      		redirect_to :action => 'index'
+      		redirect_to :action => 'edit'
    		else
       		render :action => 'edit'
    		end
@@ -71,7 +71,7 @@ class AdvertisementsController < ApplicationController
 	end
 
 	def advertisement_params
-   		params.require(:advertisement).permit(:name, :category_id, :description, :beacon_id, :price)
+   		params.require(:advertisement).permit(:name, :category_id, :description, :beacon_id, :price, :image)
 	end
 
 	def beacon_param

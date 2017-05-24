@@ -24,29 +24,63 @@ float: left;
 
 .view-advertisement {
   float: right;
-  width: 45%;
+  width: 330px;
   font-family: 'Gloria Hallelujah', cursive;
   color: white;
   margin-left: 5%;
-  background-image: image-url("ad.jpg");
+  background-image: image-url("ad.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   border: 1px solid #e3e3e3;
   border-radius: 4px;
 }
 
+.view-advertisement {
+  float: left;
+  width: 30%;
+  font-family: 'Gloria Hallelujah', cursive;
+  color: white;
+  margin-left: 5%;
+  background-image: image-url("ad.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  height: 590px;
+}
+
 #sale {
-	margin-top: 20px;
-	text-decoration: underline;
+  margin-top: 90px;
+  color: black;
+  font-size: 19px;
+}
+
+#adImage {
+  width: 300px;
+  height: 150px;
+}
+
+#adCategory, #adDescription {
+  margin-top: 30px;
+  color: black;
+  font-size: 17px;
+  width: 80%;
+  text-align: center;
+}
+
+#adPrice {
+    margin-top: 30px;
+    margin-bottom: 60px;
+    color: white;
+    font-size: 20px;
+    background: #337ab7;
+    padding: 5px 26px;
+    border-radius: 5px;
 }
 
 .image {
 
   text-align: center;
-  font-size: 250%;
-  //margin: 5%;
   margin-bottom: 0;
   margin-top: 0;
-  padding: 5%;
-
 }

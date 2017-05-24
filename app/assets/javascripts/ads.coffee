@@ -4,7 +4,7 @@
 #
 #
 
-jQuery ($) ->
+$(document).on "turbolinks:load", ->
 	$('#adCategory').text $('#category').find(":selected").text();
 	$('#category').change ->
 		$('#adCategory').text $(this).find(":selected").text();
