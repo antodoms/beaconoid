@@ -15,10 +15,10 @@
                     <li class="<%= 'active' if (controller_name == 'report' && action_name == 'store') %>"> 
                         <a href="<%= report_store_path %>"><i class="fa fa-fw fa-table"></i> Store</a>
                     </li>
-                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'beacon') %>"> 
-                        <a href="#"><i class="fa fa-fw fa-table"></i> Beacon</a> 
+                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'store') %>"> 
+                        <a href="<%= report_sales_path %>"><i class="fa fa-fw fa-table"></i> Sales </a> 
                     </li>
-                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'advertisement') %>">
+                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'category') %>">
                         <a href="<%= report_category_path %>"><i class="fa fa-fw fa-table"></i>Category</a>\
                     </li>
                 </ul>

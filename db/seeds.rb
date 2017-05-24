@@ -31,7 +31,7 @@ end
 
 if Store.count < 50
 	(0..60).each do |x|
-		Store.find_or_create_by(name: Faker::Address.street_name, unique_id: Faker::Company.duns_number, image_url: Faker::Avatar.image("x","500x300"))
+		Store.find_or_create_by(name: Faker::Address.street_name, unique_id: Faker::Company.duns_number, image_url: Faker::Avatar.image("x","500x300"), sales: Faker::Commerce.price)
 	end
 end
 

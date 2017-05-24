@@ -60,7 +60,47 @@ class CustomerTracking
 		final_data
 	end
 
-	def self.group_by_category(action="click", time_from=Time.now-1.month, time_to=Time.now, page=1, limit=6)
+	def self.group_by_sale(action="click")
+		final_data = []
+
+		ab = self.collection.aggregate([
+				{"$group": {"_id": "$store_id" }}				
+				])
+
+		store_with_beacon = []
+		store_without_beacon = []
+		Store.all.each do |s|
+			flag = false
+			store_id = s["_id"].to_i
+
+			Beacon.all.each do |b|
+
+				if b.store_id == s.id
+					store_with_beacon << [ s.name, s.sales, s.id]
+					flag = true
+				end
+
+			end
+			
+			store_id = s["_id"].to_i
+			if flag == false
+				store_without_beacon << [ s.name, s.sales, s.id]
+			end
+			flag = false
+		end
+
+		if action == "click"
+			store_with_beacon
+		elsif action == "fetch"
+			store_without_beacon
+		end
+				
+	end
+
+
+
+
+	def self.group_by_category(action="fetch", time_from=Time.now-1.month, time_to=Time.now, page=1, limit=6)
 		final_data = []
 
 		ab = self.collection.aggregate([
@@ -72,8 +112,9 @@ class CustomerTracking
 
 		final_data = []
 
+
 		ab.each do |b|
-			if Advertisement.find_by_beacon_id(Beacon.find(b["_id"])) != nil 
+			if Advertisement.find_by_beacon_id(Beacon.find_by(id: b["_id"])) != nil
 				beacon_id = Advertisement.find_by_beacon_id(Beacon.find(b["_id"])).category_id		
 				final_data << [ Category.find(beacon_id).name, b["count"].to_i,  Category.find(beacon_id).id]
 			end

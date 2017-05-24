@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  	<div class="row">		
+    	<div class="col-lg-12">
+                <h2 class="page-header">Monthly Sale Report</h2>
+                <p class="lead">A detailed analysis of Sale in Stores with beacons and Stores without beacons</a>.</p>
+            </div>			
+    	</div>
+    	<div class="row">		
+    		<div class="col-lg-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Stores Without Beacons</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="flot-chart">
+                            <div class="flot-chart-content" id="flot-pie-chart">
+                                <%= pie_chart @store_without_beacon, width: 1000 %>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <table class="table table-hover">
+								<thead>
+							      <tr>
+							        <th>Id</th>
+							        <th>Store Name</th>
+							        <th>Sale</th>
+							      </tr>
+							    </thead>
+							    <tbody>
+							      <% @store_without_beacon.each do |store| %>
+							      	<tr>
+							      		<td style="text-align: left"><%= store[2] %></td>
+	                            		<td style="text-align: left"><%= link_to "#{store[0]}", store_path(id: store[2]) %></td>
+	                            		<td style="text-align: left"><%= store[1] %></td>
+	                            	</tr>
+	                            <% end %>
+							    </tbody>
+							</table>
+
+                            <ul class="pagination">
+                                <% (1..@fetch_data_count).each do |x| %>
+                                  <li><%= link_to x, report_store_path(:click_page => params[:click_page], :fetch_page => x) %></li>
+                                <% end %>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    			
+    		<div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Stores With Beacons </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="flot-chart">
+                            <div class="flot-chart-content" id="flot-bar-chart">
+                                <%= pie_chart @store_with_beacon, width: 500 %>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <table class="table table-hover">
+                                <thead>
+                                  <tr>
+                                    <th>Id</th>
+                                    <th>Store Name</th>
+                                    <th>Sale</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% @store_with_beacon.each do |store| %>
+                                    <tr>
+                                        <td style="text-align: left"><%= store[2] %></td>
+                                        <td style="text-align: left"><%= link_to "#{store[0]}", store_path(id: store[2]) %></td>
+                                        <td style="text-align: left"><%= store[1] %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                            </table>
+
+                            <ul class="pagination">
+                                <% (1..@click_data_count+1).each do |x| %>
+                                  <li><%= link_to x,report_store_path(:click_page => x, :fetch_page => params[:fetch_page]) %></li>
+                                <% end %>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+
+    		

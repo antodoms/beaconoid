@@ -23,7 +23,7 @@ class BeaconsController < ApplicationController
 		authorize @beacon
 	
    		if @beacon.save
-      		redirect_to :action => 'index'
+      		redirect_to beacons_path, notice: "#{@beacon.name} has been created succesfully" and return
    		else
    			flash[:error] = @beacon.errors.full_messages.to_sentence
       		render :action => 'new'
@@ -40,7 +40,7 @@ class BeaconsController < ApplicationController
 		end
 
 		@beacon.destroy
-		redirect_to stores_path, notice: "#{@beacon.name} has been deleted" and return
+		redirect_to _path, notice: "#{@beacon.name} has been deleted" and return
 	end
 
 	def show

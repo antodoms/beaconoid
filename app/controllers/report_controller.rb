@@ -15,7 +15,7 @@ class ReportController < ApplicationController
   	@click_data = CustomerTracking.group_by_store("click", (Time.now-1.month), Time.now)
   	@fetch_data = CustomerTracking.group_by_store("fetch", (Time.now-1.month), Time.now)
     @click_data_category = CustomerTracking.group_by_category("click", (Time.now-1.month), Time.now)
-    @fetch_data_category = CustomerTracking.group_by_category("click", (Time.now-1.month), Time.now)
+    @fetch_data_category = CustomerTracking.group_by_category("fetch", (Time.now-1.month), Time.now)
 
   end
 
@@ -62,5 +62,28 @@ class ReportController < ApplicationController
     @click_data_count = 1 if !@click_data_count.present?
     @fetch_data_count = 1 if !@fetch_data_count.present?
   end
+
+
+  def sale
+    authorize :report, :store?
+
+    if params[:click_page].present?
+      @store_with_beacon = CustomerTracking.group_by_sale("click")
+    else
+      @store_with_beacon = CustomerTracking.group_by_sale("click")
+    end
+    if params[:fetch_page].present?
+      @store_without_beacon = CustomerTracking.group_by_sale("fetch")
+    else
+      @store_without_beacon = CustomerTracking.group_by_sale("fetch")
+    end
+   
+    #binding.pry
+    @click_data_count = 1 if !@click_data_count.present?
+    @fetch_data_count = 1 if !@fetch_data_count.present?
+
+
+  end
+
 
 end
