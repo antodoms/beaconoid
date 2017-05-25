@@ -30,7 +30,7 @@ class BeaconsController < ApplicationController
 		@other_list = []
 
 		json_data.each do |beacon_info|
-			unique_reference = "#{beacon_info["instanceId"]}#{beacon_info["namespace"]}"
+			unique_reference = "#{beacon_info["namespace"]}#{beacon_info["instanceId"]}"
 			beacon = Beacon.find_by(:unique_reference => unique_reference)
 			if beacon.present?
 				beacon.name = beacon_info["uniqueId"]
