@@ -2,53 +2,47 @@
   <!-- Page Heading -->
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">
-          Categories
-      </h1>
-
+      <%= render "shared/flash_message" %>
       <div id="page-wrapper">
         <div class="container-fluid">
           <!-- Top Row with Charts -->
-          <div class="row">
-            <div class="well">
-              <%= link_to "New Category", new_category_path, class: "btn btn-primary" %>
-            </div>
-
-            <%= render "shared/flash_message" %>
-
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Category</th>
-                  <th>Description</th>
-                  <th>&nbsp;</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% if @categories.size == 0 %>
-                  <tr>
-                    <td colspan="6">No categories found.</td>
-                  </tr>
-                <% else %>
-                  <% @categories.each do |category| %>
-                    <tr>
-                      <td><%= category.id %></td>
-                      <td><%= category.name %></td>
-                      <td><%= category.description %></td>
-                      <td>
-                        <%= link_to "Edit", edit_category_path(category), class: "btn btn-default" %>
-                      </td>
-                      <td>
-                        <%= button_to "Delete", category, method: :delete, data: { confirm: "Are you sure you wish to delete #{category.name} ?" }, class: "btn btn-danger" %>
-                      </td>
-                    </tr>
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>
+          <h1 class="page-header" id="k"> Categories </h1>
+          <div class="well">
+            <%= link_to "New Category", new_category_path, class: "btn btn-primary" %>
           </div>
+
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @categories.size == 0 %>
+                <tr>
+                  <td colspan="6">No categories found.</td>
+                </tr>
+              <% else %>
+                <% @categories.each do |category| %>
+                  <tr>
+                    <td><%= category.id %></td>
+                    <td><%= category.name %></td>
+                    <td><%= category.description %></td>
+                    <td>
+                      <%= link_to "Edit", edit_category_path(category), class: "btn btn-default" %>
+                    </td>
+                    <td>
+                      <%= button_to "Delete", category, method: :delete, data: { confirm: "Are you sure you wish to delete #{category.name} ?" }, class: "btn btn-danger" %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
