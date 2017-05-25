@@ -8,13 +8,61 @@ class BeaconsController < ApplicationController
 		end
 	end
 
+	def create_request
+		Typhoeus::Request.new(
+	      "https://api.kontakt.io/device",
+	      method: :get,
+	      #body: xml_body,
+	      headers: {
+	         "Accept" => "application/vnd.com.kontakt+json;version=10",
+	         "Api-Key" => "#{ENV["KONTAKT_API_KEY"]}",
+	        "Content-Type" => "application/x-www-form-urlencoded",
+	        "User-Agent" => "beaconoid/1.0"
+	      }
+	    )
+	end
+
 	def index
-		@beacons = Beacon.all
-		authorize @beacons
+		json_data = JSON.parse(create_request.run.response_body)["devices"]
+		
+		@registered_list = []
+		@unregistered_list = []
+		@other_list = []
+
+		json_data.each do |beacon_info|
+			unique_reference = "#{beacon_info["instanceId"]}#{beacon_info["namespace"]}"
+			beacon = Beacon.find_by(:unique_reference => unique_reference)
+			if beacon.present?
+				beacon.name = beacon_info["uniqueId"]
+				beacon.longitude = beacon_info["lng"] if beacon_info["lng"].present?
+				beacon.latitude = beacon_info["lat"] if beacon_info["lat"].present?
+				beacon.save
+				@registered_list << beacon
+			else
+				@unregistered_list << Beacon.new(:unique_reference => unique_reference, :name => beacon_info["uniqueId"],:longitude => beacon_info["lng"], :latitude => beacon_info["lat"])
+			end
+		end
+
+		@other_list = Beacon.where.not(:id => @registered_list.pluck(:id))
+
+		authorize @other_list
 	end
 
 	def new
    		@beacon = Beacon.new
+   		if params[:name].present?
+   			@beacon.name = params[:name]
+   		end
+   		if params[:unique_reference].present?
+   			@beacon.unique_reference = params[:unique_reference]
+   		end
+   		if params[:longitude].present?
+   			@beacon.longitude = params[:longitude]
+   		end
+   		if params[:latitude].present?
+   			@beacon.longitude = params[:latitude]
+   		end
+
    		authorize @beacon
 	end
 
@@ -40,7 +88,7 @@ class BeaconsController < ApplicationController
 		end
 
 		@beacon.destroy
-		redirect_to _path, notice: "#{@beacon.name} has been deleted" and return
+		redirect_to beacons_path, notice: "#{@beacon.name} has been deleted" and return
 	end
 
 	def show
