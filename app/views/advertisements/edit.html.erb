@@ -1,22 +1,33 @@
-<h1>Edit Advertisement</h1>
-<div class="well">
-  <%= render "form"%>
-  <div class="view-advertisement"> 
-  	<div class="image">
-  		<label id="sale"> TODAY'S SPECIALS </label>
-  	</div>
-    <div class="image">
-      <img src="<%= @advertisement.image.url(:medium) %>" id="adImage"/>
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render "shared/flash_message" %>
+      <div id="page-wrapper">
+        <div class="container-fluid">
+          <h1 class="page-header" id="k">Edit Advertisement</h1>
+          <div class="well">
+            <%= render "form"%>
+            <div class="view-advertisement"> 
+            	<div class="image">
+            		<label id="sale"> TODAY'S SPECIALS </label>
+            	</div>
+              <div class="image">
+                <img src="<%= @advertisement.image.url(:medium) %>" id="adImage"/>
+              </div>
+            	<div class="image">
+            		<label id="adCategory"> Category </label>
+            	</div>
+            	<div class="image">
+            		<label id="adDescription"> Description </label>
+            	</div>
+            	<div class="image">
+            		<label id="adPrice"> $ Price </label>
+            	</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  	<div class="image">
-  		<label id="adCategory"> Category </label>
-  	</div>
-  	<div class="image">
-  		<label id="adDescription"> Description </label>
-  	</div>
-  	<div class="image">
-  		<label id="adPrice"> $ Price </label>
-  	</div>
-
   </div>
 </div>
