@@ -55,7 +55,10 @@ class CustomerTracking
 		final_data = []
 		ab.each do |c|
 			store_id = c["_id"].to_i
-			final_data << [ Store.find_by(id: store_id).name, c["count"].to_i,  store_id]
+			store =  Store.find_by(id: store_id)
+			if store.present?
+				final_data << [store.name, c["count"].to_i,  store_id]
+			end
 		end
 		final_data
 	end
@@ -115,7 +118,10 @@ class CustomerTracking
 			#binding.pry
 			ab.each do |c|
 				category_id = JSON.parse(c["_id"]).first.to_i
-				final_data << [ Category.find_by(id: category_id).name, c["count"].to_i,  category_id]
+				category = Category.find_by(id: category_id)
+				if category.present?
+					final_data << [category.name, c["count"].to_i,  category_id]
+				end
 			end
 		else
 			ab = self.collection.aggregate([
@@ -129,8 +135,13 @@ class CustomerTracking
 
 			ab.each do |b|
 				if Advertisement.find_by_beacon_id(Beacon.find_by(id: b["_id"])) != nil 
-					category_id = Advertisement.find_by_beacon_id(Beacon.find(b["_id"])).category_id		
-					final_data << [ Category.find(category_id).name, b["count"].to_i,  Category.find(category_id).id]
+					advertisement = Advertisement.find_by(beacon_id: Beacon.find(b["_id"]))
+					if advertisement.present?
+						category = advertisement.category
+						if category.present?
+							final_data << [ category.name, b["count"].to_i,  category.id]
+						end
+					end	
 				end
 			end
 		end
