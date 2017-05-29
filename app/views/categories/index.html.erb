@@ -2,30 +2,25 @@
   <!-- Page Heading -->
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">
-          Categories
-      </h1>
-
+      <%= render "shared/flash_message" %>
       <div id="page-wrapper">
         <div class="container-fluid">
           <!-- Top Row with Charts -->
-          <div class="row">
-            <div class="well">
-              <%= link_to "New Category", new_category_path, class: "btn btn-primary" %>
-            </div>
+          <h1 class="page-header" id="k"> Categories </h1>
+          <div class="well">
+            <%= link_to "New Category", new_category_path, class: "btn btn-primary" %>
+          </div>
 
-            <%= render "shared/flash_message" %>
-
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Category</th>
-                  <th>Description</th>
-                  <th>&nbsp;</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
               <tbody>
                 <%= form_tag({:action => 'filter'}, {:method => :post}) do %>
                   <div class="form-group">
@@ -54,10 +49,9 @@
                       </td>
                     </tr>
                   <% end %>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

@@ -57,6 +57,10 @@ class StoresController < ApplicationController
 
 
     if @store.save
+      ActionCable.server.broadcast 'beaconoid:general_report',
+        message: [0,0,0,1,0,0],
+        user: current_user.id
+
       redirect_to stores_path, notice: "The Store has been created!" and return
     end
     flash[:error] = "Sorry we can't add this store. Store with same name exists."
@@ -93,6 +97,11 @@ class StoresController < ApplicationController
     end
 
     @store.destroy
+
+    ActionCable.server.broadcast 'beaconoid:general_report',
+      message: [0,0,0,-1,0,0],
+      user: current_user.id
+      
     redirect_to stores_path, notice: "#{@store.name} has been deleted!" and return
   end
 

@@ -53,6 +53,9 @@ class CategoriesController < ApplicationController
 	    authorize @category
 
 	    if @category.save
+	    	ActionCable.server.broadcast 'beaconoid:general_report',
+		      message: [0,0,0,0,1,0],
+		      user: current_user.id
 	      redirect_to categories_path, notice: "The Category has been created!" and return
 	    end
 
@@ -86,6 +89,10 @@ class CategoriesController < ApplicationController
 	    end
 
 	    @category.destroy
+	    ActionCable.server.broadcast 'beaconoid:general_report',
+		      message: [0,0,0,0,-1,0],
+		      user: current_user.id
+
 	    redirect_to categories_path, notice: "#{@category.name} has been deleted!" and return
 	  end
 	  

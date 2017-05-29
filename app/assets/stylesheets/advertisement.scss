@@ -84,3 +84,21 @@ float: left;
   margin-bottom: 0;
   margin-top: 0;
 }
+
+.outer-layer {
+    border: 1px solid;
+    padding: 20px;
+    height: 230px;
+    width: 300px;
+    margin: 0% 0% 10% 0%;
+}
+
+.inner-layer-text {
+    font-size: 30px;
+    text-align: center;
+}
+
+.inner-layer-number {
+    font-size: 5em;
+    text-align: center;
+}

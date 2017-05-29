@@ -22,5 +22,4 @@ class Advertisement < ActiveRecord::Base
   end
 
 
-
 end

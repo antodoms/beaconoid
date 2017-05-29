@@ -2,15 +2,10 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header" id="k">
-                Advertisements
-            </h1>
-			
+        	<%= render "shared/flash_message" %>
 	        <div id="page-wrapper">
-
                 <div class="container-fluid">
-
-                    <!-- Top Row with Charts -->
+                   <!-- Top Row with Charts -->
                     <div class="row">	
 						<div class="well">
 						  <%= link_to "New Advertisement", new_advertisement_path, class: "btn btn-primary" %>
@@ -65,7 +60,6 @@
 						    <% end %>
 						  </tbody>
 						</table>
-					</div>
 				</div>
 			</div>
 		</div>
