@@ -13,12 +13,13 @@
                     <!-- Top Row with Charts -->
                     <div class="row">	
 						<div class="well">
-						  <%= link_to "New Beacon", new_beacon_path, class: "btn btn-primary" %>
+							<%= link_to "New Beacon", new_beacon_path, class: "btn btn-primary" %>						  									
 						</div>
 
 						<%= render "shared/flash_message" %>
 
-						<table class="table table-bordered table-striped">
+						
+						<table class="table table-bordered table-striped">						
 						  <thead>
 						    <tr>
 						      <th>Unique Reference</th>
@@ -31,6 +32,16 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+						  <%= form_tag({:action => 'filter'}, {:method => :post}) do %>
+						  	<div class="form-group">
+  						  	<%= select_tag :filter_tag, options_for_select([['Name', "name"],
+						  							 ['Unique Reference', "unique_reference"],
+						  							 ['Store Name', "store_name"],
+						  							 ['Status', "status"]]) %>
+						  	<%= text_field_tag :filter_text%>						  	
+						  	<%= submit_tag 'Search' %>
+						  	</div>
+						<% end %>
 						    <% if @beacons.size == 0 %>
 						      <tr>
 						        <td colspan="6">No beacon found.</td>
@@ -38,12 +49,12 @@
 						    <% else %>
 						      <% @beacons.each do |beacon| %>
 						        <tr>
-								<td><%= beacon.unique_reference if  beacon.unique_reference.present? %></td>
-											          <td><%= beacon.name %></td>
+								  <td><%= beacon.unique_reference if  beacon.unique_reference.present? %></td>
+								  <td><%= beacon.name %></td>
 						          <td><%= beacon.store.name if beacon.store.present? %></td>
 						          <td><%= beacon.current_status %></td>
 						          <td>
-						            <%= link_to "View Advertisements", beacon_path(beacon), class: "btn btn-priamry" %>
+						            <%= link_to "View Advertisements", beacon_path(beacon), class: "btn btn-primary" %>
 						          </td>
 						          <td>
 						            <%= link_to "Edit", edit_beacon_path(beacon), class: "btn btn-default" %>

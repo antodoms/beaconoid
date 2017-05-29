@@ -27,12 +27,21 @@
                 </tr>
               </thead>
               <tbody>
-                <% if @categories.size == 0 %>
+                <%= form_tag({:action => 'filter'}, {:method => :post}) do %>
+                  <div class="form-group">
+                    <%= select_tag :filter_tag, options_for_select([['ID', "id"],
+                               ['Category', "category"],
+                               ['Description', "description"]]) %>
+                    <%= text_field_tag :filter_text%>               
+                    <%= submit_tag 'Search' %>
+                  </div>
+                <% end %>
+                <% if @category.size == 0 %>
                   <tr>
                     <td colspan="6">No categories found.</td>
                   </tr>
                 <% else %>
-                  <% @categories.each do |category| %>
+                  <% @category.each do |category| %>
                     <tr>
                       <td><%= category.id %></td>
                       <td><%= category.name %></td>

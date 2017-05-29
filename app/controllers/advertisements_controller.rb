@@ -9,9 +9,34 @@ class AdvertisementsController < ApplicationController
 		end
 	end
 
+	def filter    
+    	$flag = true
+    	$x = params[:filter_text].to_s
+	    $y = params[:filter_tag]
+	    redirect_to advertisements_path   
+  	end
+
 	def index
-		@advertisements = Advertisement.all
-		authorize @advertisements
+		#@advertisements = Advertisement.all
+		#authorize @advertisements
+
+		if $flag == true
+      		if $y == "advertisement_name"
+        		@advertisement = Advertisement.filter_by_advertisement_name("#{$x}") 
+      		elsif $y == "beacon_name"
+      			@beacon = Beacon.filter_by_beacon_name("#{$x}")
+        		@advertisement = Advertisement.filter_by_beacon_id(@beacon.first.id)
+      		elsif $y == "category_name"
+      			@category = Category.filter_by_category_name("#{$x}")
+        		@advertisement = Advertisement.filter_by_category_id(@category.first.id)
+      		end
+      		$flag = false 
+                          
+    	else
+      		@advertisement = Advertisement.all
+    	end
+    
+    	authorize @advertisement		
 	end
 
 	def destroy

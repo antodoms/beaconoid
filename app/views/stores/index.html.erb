@@ -27,12 +27,23 @@
                 </tr>
               </thead>
               <tbody>
-                <% if @stores.size == 0 %>
+                <%= form_tag({:action => 'filter'}, {:method => :post}) do %>
+                  <div class="form-group">
+                    <%= select_tag :filter_tag, options_for_select([['ID', "id"],
+                               ['Store Name', "store_name"],
+                               ['Store Code', "store_code"],
+                               ['Store Sale', "store_sale"]
+                               ]) %>
+                    <%= text_field_tag :filter_text%>               
+                    <%= submit_tag 'Search' %>
+                  </div>
+                <% end %>
+                <% if @store.size == 0 %>
                   <tr>
                     <td colspan="6">No store found.</td>
                   </tr>
                 <% else %>
-                  <% @stores.each do |store| %>
+                  <% @store.each do |store| %>
                     <tr>
                       <td><%= store.id %></td>
                       <td><%= store.name %></td>

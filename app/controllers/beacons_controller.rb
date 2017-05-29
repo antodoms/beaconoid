@@ -1,6 +1,6 @@
 class BeaconsController < ApplicationController
 	def user_not_authorized
-		flash[:error] = "You are not authorized to perform this action."
+		flash[:xerror] = "You are not authorized to perform this action."
 		if policy(:beacon).index?
 		  redirect_to beacons_path
 		else
@@ -8,9 +8,44 @@ class BeaconsController < ApplicationController
 		end
 	end
 
+	def filter		
+
+		$flag = true
+		$x = params[:filter_text].to_s
+		$y = params[:filter_tag]
+		redirect_to beacons_path
+		
+
+	end
+
 	def index
-		@beacons = Beacon.all
+		#@beacons = Beacon.all
+		#authorize @beacons
+
+		if $flag == true
+			if $y == "name"
+				@beacons = Beacon.filter_by_beacon_name("#{$x}") 
+			elsif $y == "unique_reference"
+				@beacons = Beacon.filter_by_reference("#{$x}")
+			elsif $y == "store_name"
+				@store = Store.filter_by_store_name("#{$x}")
+				if(!@store.present?)
+					$flag = false
+					redirect_to beacons_path, error: "No beacons found." and return
+				else
+					@beacons = Beacon.filter_by_store_id(@store.first.id)
+				end
+			elsif $y == "status"
+				@beacons = Beacon.filter_by_status("#{$x}")
+			end
+			$flag = false 
+													
+		else
+			@beacons = Beacon.all
+		end
+		
 		authorize @beacons
+
 	end
 
 	def new

@@ -9,9 +9,34 @@ class CategoriesController < ApplicationController
 		end
 	end
 
+	def filter		
+
+		$flag = true
+		$x = params[:filter_text].to_s
+		$y = params[:filter_tag]
+		redirect_to categories_path		
+	end
+
+
 	def index
-		@categories = Category.all
-		authorize @categories
+		#@categories = Category.all
+		#authorize @categories
+
+		if $flag == true
+			if $y == "id"
+				@category = Category.filter_by_id("#{$x}") 
+			elsif $y == "category"
+				@category = Category.filter_by_category_name("#{$x}")
+			elsif $y == "description"
+				@category = Category.filter_by_description("#{$x}")
+			end
+			$flag = false 
+													
+		else
+			@category = Category.all
+		end
+		
+		authorize @category
 	end
 
 	def new

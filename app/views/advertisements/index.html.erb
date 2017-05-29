@@ -30,12 +30,23 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <% if @advertisements.size == 0 %>
+						  	<%= form_tag({:action => 'filter'}, {:method => :post}) do %>
+                  				<div class="form-group">
+                    				<%= select_tag :filter_tag, options_for_select([
+                    								['Advertisement', "advertisement_name"],
+                               						['Beacon Name', "beacon_name"],
+                               						['Category Name', "category_name"]
+                               						]) %>
+                    				<%= text_field_tag :filter_text%>               
+                    				<%= submit_tag 'Search' %>
+                  				</div>
+                			<% end %>
+						    <% if @advertisement.size == 0 %>
 						      <tr>
 						        <td colspan="6">No advertisements found.</td>
 						      </tr>
 						    <% else %>
-						      <% @advertisements.each do |advertisement| %>
+						      <% @advertisement.each do |advertisement| %>
 						        <tr>
 						          <td><%= advertisement.name %></td>
 						          <td><%= advertisement.beacon.name if advertisement.beacon.present? %></td>

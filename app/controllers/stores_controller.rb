@@ -10,9 +10,36 @@ class StoresController < ApplicationController
     end
   end
   
+  def filter    
+
+    $flag = true
+    $x = params[:filter_text].to_s
+    $y = params[:filter_tag]
+    redirect_to stores_path   
+  end
+
   def index
-    @stores = Store.all
-    authorize @stores
+    #@stores = Store.all
+    #authorize @stores
+
+    if $flag == true
+      if $y == "id"
+        @store = Store.filter_by_store_id("#{$x}") 
+      elsif $y == "store_name"
+        @store = Store.filter_by_store_name("#{$x}")
+      elsif $y == "store_code"
+        @store = Store.filter_by_store_code("#{$x}")
+      elsif $y == "store_sale"
+        @store == Store.filter_by_store_sale("#{$x}")          
+      end
+      $flag = false 
+                          
+    else
+      @store = Store.all
+    end
+    
+    authorize @store
+
   end
 
   def new
