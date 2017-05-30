@@ -40,59 +40,7 @@
 					  </tbody>
 					</table>
 					<br>
-
-<<<<<<< HEAD ----- old version stuff
-						
-						<table class="table table-bordered table-striped">						
-						  <thead>
-						    <tr>
-						      <th>Unique Reference</th>
-						      <th>Name</th>
-						      <th>Store Name</th>
-						      <th>Status</th>
-						      <th>&nbsp;</th>
-						      <th>&nbsp;</th>
-						      <th>&nbsp;</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						  <%= form_tag({:action => 'filter'}, {:method => :post}) do %>
-						  	<div class="form-group">
-  						  	<%= select_tag :filter_tag, options_for_select([['Name', "name"],
-						  							 ['Unique Reference', "unique_reference"],
-						  							 ['Store Name', "store_name"],
-						  							 ['Status', "status"]]) %>
-						  	<%= text_field_tag :filter_text%>						  	
-						  	<%= submit_tag 'Search' %>
-						  	</div>
-						<% end %>
-						    <% if @beacons.size == 0 %>
-						      <tr>
-						        <td colspan="6">No beacon found.</td>
-						      </tr>
-						    <% else %>
-						      <% @beacons.each do |beacon| %>
-						        <tr>
-								  <td><%= beacon.unique_reference if  beacon.unique_reference.present? %></td>
-								  <td><%= beacon.name %></td>
-						          <td><%= beacon.store.name if beacon.store.present? %></td>
-						          <td><%= beacon.current_status %></td>
-						          <td>
-						            <%= link_to "View Advertisements", beacon_path(beacon), class: "btn btn-primary" %>
-						          </td>
-						          <td>
-						            <%= link_to "Edit", edit_beacon_path(beacon), class: "btn btn-default" %>
-						          </td>
-						          <td>
-						            <%= button_to "Delete", beacon, method: :delete, data: { confirm: "Are you sure you wish to delete #{beacon.name} ?" }, class: "btn btn-danger" %>
-						          </td>
-						        </tr>
-						      <% end %>
-						    <% end %>
-						  </tbody>
-						</table>
-					</div>
-=======  old version stuff end
+					
 					<h3>Registered List from Kontakt</h3>
 					<table class="table table-bordered table-striped" id="registered-list">
 					  <thead>
