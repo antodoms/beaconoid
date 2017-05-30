@@ -17,3 +17,5 @@ class Category < ApplicationRecord
 
 
 end
+
+WillPaginate.per_page = 10

@@ -37,6 +37,8 @@ class CategoriesController < ApplicationController
 		end
 		
 		authorize @category
+		@category = @category.paginate(page: params[:page], per_page: 10)
+
 	end
 
 	def new

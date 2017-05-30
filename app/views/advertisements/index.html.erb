@@ -13,6 +13,9 @@
 
 						<%= render "shared/flash_message" %>
 
+						<ul class="pagination">
+				        	<%= will_paginate @advertisement, container: false %>
+          				</ul>
 						<table class="table table-bordered table-striped">
 						  <thead>
 						    <tr>
@@ -60,6 +63,9 @@
 						    <% end %>
 						  </tbody>
 						</table>
+						<ul class="pagination">
+          					<%= will_paginate @advertisement, container: false %>
+          				</ul>
 				</div>
 			</div>
 		</div>

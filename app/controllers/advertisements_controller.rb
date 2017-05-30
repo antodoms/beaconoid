@@ -36,7 +36,10 @@ class AdvertisementsController < ApplicationController
       		@advertisement = Advertisement.all
     	end
     
-    	authorize @advertisement		
+    	authorize @advertisement
+
+    	@advertisement = @advertisement.paginate(page: params[:page], per_page: 10)
+		
 	end
 
 	def destroy

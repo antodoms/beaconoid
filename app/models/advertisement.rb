@@ -23,3 +23,5 @@ class Advertisement < ActiveRecord::Base
 
 
 end
+
+WillPaginate.per_page = 10
