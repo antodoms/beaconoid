@@ -37,7 +37,6 @@
 						      <th>Price</th>
 						      <th>&nbsp;</th>
 						      <th>&nbsp;</th>
-						      <th>&nbsp;</th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -52,9 +51,6 @@
 						          <td><%= advertisement.category.name if advertisement.category.present? %></td>
 						          <td><%= advertisement.description %></td>
 						          <td><%= advertisement.price %></td>
-						          <td>
-						            <%= link_to "View", beacon_advertisement_path(@beacon,advertisement), class: "btn btn-primary" %>
-						          </td>
 						          <td>
 						            <%= link_to "Edit", edit_beacon_advertisement_path(@beacon,advertisement), class: "btn btn-default" %>
 						          </td>
