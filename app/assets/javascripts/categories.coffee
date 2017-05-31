@@ -3,3 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 #
 #
+
+
+$(document).on "turbolinks:load", ->
+  $('#category_search_filter').autocomplete source: $('#category_search_filter').data('autocomplete-source')

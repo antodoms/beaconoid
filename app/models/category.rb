@@ -1,21 +1,21 @@
 class Category < ApplicationRecord
 
+
 	validates_uniqueness_of :name
 	has_many :advertisements
 
-	def self.filter_by_id(text)
-		where(id: text)
+	WillPaginate.per_page = 10
+
+	def search_filter
+	  category.try(:name)
 	end
 
-	def self.filter_by_category_name(text)
-		where(name: text)
+	def search_filter=(name)
+	  Category.find_by(name: name) if name.present?
 	end
 
-	def self.filter_by_description(text)
-		where(description: text)
+	def self.filter_by_name(text)
+		where("(LOWER(name) like LOWER(?)) OR (LOWER(description) like LOWER(?))", "%#{text}%", "%#{text}%")
 	end
-
 
 end
-
-WillPaginate.per_page = 10

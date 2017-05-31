@@ -32,10 +32,12 @@ Rails.application.routes.draw do
 
     resources :advertisements
 
-    post 'beacons/index', to: "beacons#filter"
-    post 'categories/index', to: "categories#filter"
-    post 'stores/index', to: "stores#filter"
-    post 'advertisements/index', to: "advertisements#filter"
+    post 'categories/', to: "categories#index", as: :categories_post
+    get 'categories/filter', to: "categories#filter", as: :category_filter
+    post 'stores/', to: "stores#index", as: :stores_post
+    get 'stores/filter', to: "stores#filter", as: :store_filter
+    post 'advertisements/', to: "advertisements#index", as: :advertisements_post
+    get 'advertisements/filter', to: "advertisements#filter", as: :advertisement_filter
     
     get 'report', to: "report#index"
     get 'report/store', to: "report#store"
