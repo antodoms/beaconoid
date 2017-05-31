@@ -38,7 +38,10 @@ class StoresController < ApplicationController
       @store = Store.all
     end
     
+
     authorize @store
+
+    @store = @store.paginate(page: params[:page], per_page: 10)
 
   end
 

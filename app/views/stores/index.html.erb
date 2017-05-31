@@ -10,7 +10,7 @@
           <div class="well">
             <%= link_to "New Store", new_store_path, class: "btn btn-primary" %>
           </div>
-
+          
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
@@ -23,7 +23,6 @@
               </tr>
             </thead>
             <tbody>
-             
                 <%= form_tag({:action => 'filter'}, {:method => :post}) do %>
                   <div class="form-group">
                     <%= select_tag :filter_tag, options_for_select([['ID', "id"],
@@ -58,6 +57,9 @@
                 <% end %>
             </tbody>
           </table>
+          <ul class="pagination">
+            <%= will_paginate @store, container: false %>
+          </ul>
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ gem 'rails', '~> 5.0.1'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 gem 'mongoid'
+
 gem "paperclip"
 gem 'aws-sdk', '~>2'
 gem 'dynamoid', '~> 1'
@@ -33,6 +34,7 @@ gem 'unicorn'
 gem 'figaro'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 
@@ -43,6 +45,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'will_paginate', '~> 3.1.0'
 gem "typhoeus"
 
 gem 'devise'

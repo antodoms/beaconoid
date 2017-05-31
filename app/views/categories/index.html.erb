@@ -11,6 +11,14 @@
             <%= link_to "New Category", new_category_path, class: "btn btn-primary" %>
           </div>
 
+
+          <%= form_tag categories_post_path do %>
+            <div class="form-group">
+              <%= text_field :category_search, :filter, data: { autocomplete_source: category_filter_path } %>            
+              <%= submit_tag 'Search' %>
+            </div>
+          <% end %>
+
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
@@ -22,15 +30,6 @@
               </tr>
             </thead>
               <tbody>
-                <%= form_tag({:action => 'filter'}, {:method => :post}) do %>
-                  <div class="form-group">
-                    <%= select_tag :filter_tag, options_for_select([['ID', "id"],
-                               ['Category', "category"],
-                               ['Description', "description"]]) %>
-                    <%= text_field_tag :filter_text%>               
-                    <%= submit_tag 'Search' %>
-                  </div>
-                <% end %>
                 <% if @category.size == 0 %>
                   <tr>
                     <td colspan="6">No categories found.</td>
@@ -52,6 +51,9 @@
               <% end %>
             </tbody>
           </table>
+          <ul class="pagination">
+            <%= will_paginate @category, container: false %>
+          </ul>
         </div>
       </div>
     </div>

@@ -21,3 +21,5 @@ class Store < ActiveRecord::Base
 
 
 end
+
+WillPaginate.per_page = 10

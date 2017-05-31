@@ -6,7 +6,8 @@
 	        <div id="page-wrapper">
                 <div class="container-fluid">
                    <!-- Top Row with Charts -->
-                    <div class="row">	
+                    <h1 class="page-header" id="k"> Advertisements </h1>
+
 						<div class="well">
 						  <%= link_to "New Advertisement", new_advertisement_path, class: "btn btn-primary" %>
 						</div>
@@ -60,7 +61,10 @@
 						    <% end %>
 						  </tbody>
 						</table>
-				</div>
+						<ul class="pagination">
+          					<%= will_paginate @advertisement, container: false %>
+          				</ul>
+				
 			</div>
 		</div>
 	</div>
