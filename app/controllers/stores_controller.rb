@@ -11,37 +11,23 @@ class StoresController < ApplicationController
   end
   
   def filter    
-
-    $flag = true
-    $x = params[:filter_text].to_s
-    $y = params[:filter_tag]
-    redirect_to stores_path   
+    if params[:store_search].present? && params[:store_search][:filter].present?
+      redirect_to stores_path(:store_search => params[:store_search][:filter])
+    elsif params[:store_search].present? && !params[:store_search][:filter].present?
+      redirect_to stores_path(:store_search => "")
+    else
+      @store = Store.filter_by_name(params[:term]).paginate(page: params[:page], per_page: 10)
+      render json: @store.map(&:name)
+    end
   end
 
   def index
-    #@stores = Store.all
-    #authorize @stores
-
-    if $flag == true
-      if $y == "id"
-        @store = Store.filter_by_store_id("#{$x}") 
-      elsif $y == "store_name"
-        @store = Store.filter_by_store_name("#{$x}")
-      elsif $y == "store_code"
-        @store = Store.filter_by_store_code("#{$x}")
-      elsif $y == "store_sale"
-        @store == Store.filter_by_store_sale("#{$x}")          
-      end
-      $flag = false 
-                          
+    if params[:store_search].present?
+      @store = Store.filter_by_name(params[:store_search]).paginate(page: params[:page], per_page: 10)
     else
-      @store = Store.all
+      @store = Store.paginate(page: params[:page], per_page: 10)
     end
-    
-
-    authorize @store
-
-    @store = @store.paginate(page: params[:page], per_page: 10)
+      authorize @store
 
   end
 

@@ -7,14 +7,21 @@
         <div class="container-fluid">
           <!-- Top Row with Charts -->
           <h1 class="page-header" id="k"> Stores </h1>
+
           <div class="well">
-            <%= link_to "New Store", new_store_path, class: "btn btn-primary" %>
+            <%= form_tag store_filter_path, class: "col-md-6 pull-left" do %>
+                    <div class="form-group col-md-10">
+                        <%= text_field :store_search, :filter, data: { autocomplete_source: store_filter_path }, class: "form-control store-search-input" %> 
+                    </div>
+                    <%= submit_tag 'Search', class: "btn btn-primary col-md-2 store-search-submit" %>
+                <% end %>
+            <%= link_to "New Stores", new_store_path, class: "btn btn-primary col-md-2 pull-right" %>
           </div>
+
           
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Store Code</th>
                 <th>&nbsp;</th>
@@ -23,17 +30,6 @@
               </tr>
             </thead>
             <tbody>
-                <%= form_tag({:action => 'filter'}, {:method => :post}) do %>
-                  <div class="form-group">
-                    <%= select_tag :filter_tag, options_for_select([['ID', "id"],
-                               ['Store Name', "store_name"],
-                               ['Store Code', "store_code"],
-                               ['Store Sale', "store_sale"]
-                               ]) %>
-                    <%= text_field_tag :filter_text%>               
-                    <%= submit_tag 'Search' %>
-                  </div>
-                <% end %>
                 <% if @store.size == 0 %>
                   <tr>
                     <td colspan="6">No store found.</td>
@@ -41,7 +37,6 @@
                 <% else %>
                   <% @store.each do |store| %>
                     <tr>
-                      <td><%= store.id %></td>
                       <td><%= store.name %></td>
                       <td><%= store.unique_id %></td>
                       <td><%= store.sales %></td>
