@@ -8,15 +8,16 @@ class BeaconsController < ApplicationController
 		end
 	end
 
-	def filter		
-
-		$flag = true
-		$x = params[:filter_text].to_s
-		$y = params[:filter_tag]
-		redirect_to beacons_path
-		
-
-	end
+  def filter    
+    if params[:beacon_search].present? && params[:beacon_search][:filter].present?
+      redirect_to beacons_path(:beacon_search => params[:beacon_search][:filter])
+    elsif params[:beacon_search].present? && !params[:beacon_search][:filter].present?
+      redirect_to beacons_path(:beacon_search => "")
+    else
+      @beacon = Beacon.filter_by_name(params[:term]).paginate(page: params[:page], per_page: 10)
+      render json: @beacon.map(&:name)
+    end
+  end
 		
 
 	def create_request
@@ -55,7 +56,12 @@ class BeaconsController < ApplicationController
 			end
 		end
 
-		@other_list = Beacon.where.not(:id => @registered_list.pluck(:id))
+		if params[:beacon_search].present?
+			@other_list = Beacon.filter_by_name(params[:beacon_search]).where.not(:id => @registered_list.pluck(:id)).paginate(page: params[:page], per_page: 10)
+		else
+			@other_list = Beacon.where.not(:id => @registered_list.pluck(:id)).paginate(page: params[:page], per_page: 10)
+		end
+
 
 		authorize @other_list
 	end

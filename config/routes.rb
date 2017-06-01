@@ -25,21 +25,21 @@ Rails.application.routes.draw do
 	#root to: "stores#index"
 
     get 'dashboard', to: "dashboard#index"
-	
-    resources :beacons do
-        resources :advertisements
-    end
-
     
 
     match 'categories/filter', to: "categories#filter", as: :category_filter, via: [:get, :post]
     match 'stores/filter', to: "stores#filter", as: :store_filter, via: [:get, :post]
     match 'advertisements/filter', to: "advertisements#filter", as: :advertisement_filter, via: [:get, :post]
+    match 'beacons/filter', to: "beacons#filter", as: :beacon_filter, via: [:get, :post]
     
     get 'report', to: "report#index"
     get 'report/store', to: "report#store"
     get 'report/category', to: "report#category"
     get 'report/sales', to: "report#sale"
+
+    resources :beacons do
+        resources :advertisements
+    end
 
     resources :advertisements
     resources :stores
