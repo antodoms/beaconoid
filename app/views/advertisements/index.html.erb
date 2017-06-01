@@ -9,10 +9,15 @@
                     <h1 class="page-header" id="k"> Advertisements </h1>
 
 						<div class="well">
-						  <%= link_to "New Advertisement", new_advertisement_path, class: "btn btn-primary" %>
+							<%= form_tag advertisement_filter_path, class: "col-md-6 pull-left" do %>
+					            <div class="form-group col-md-10">
+					              	<%= text_field :advertisement_search, :filter, data: { autocomplete_source: advertisement_filter_path }, class: "form-control category-search-input" %> 
+					            </div>
+					            <%= submit_tag 'Search', class: "btn btn-primary col-md-2 category-search-submit" %>
+					        <% end %>
+						  <%= link_to "New Advertisement", new_advertisement_path, class: "btn btn-primary col-md-2 pull-right" %>
 						</div>
 
-						<%= render "shared/flash_message" %>
 
 						<table class="table table-bordered table-striped">
 						  <thead>
@@ -26,17 +31,6 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-						  	<%= form_tag({:action => 'filter'}, {:method => :post}) do %>
-                  				<div class="form-group">
-                    				<%= select_tag :filter_tag, options_for_select([
-                    								['Advertisement', "advertisement_name"],
-                               						['Beacon Name', "beacon_name"],
-                               						['Category Name', "category_name"]
-                               						]) %>
-                    				<%= text_field_tag :filter_text%>               
-                    				<%= submit_tag 'Search' %>
-                  				</div>
-                			<% end %>
 						    <% if @advertisement.size == 0 %>
 						      <tr>
 						        <td colspan="6">No advertisements found.</td>

@@ -9,16 +9,10 @@ class Advertisement < ActiveRecord::Base
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
-  def self.filter_by_advertisement_name(text)
-  	where(name: text)
-  end
+  default_scope { order(created_at: :desc) }
 
-  def self.filter_by_beacon_id(text)
-  	where(beacon_id: text)
-  end
-
-  def self.filter_by_category_id(text)
-  	where(category_id: text)
+  def self.filter_by_name(text)
+    joins("INNER JOIN categories ON categories.id = advertisements.category_id").where("(LOWER(advertisements.name) like LOWER(?)) OR (LOWER(advertisements.description) like LOWER(?)) OR (LOWER(categories.name) like LOWER(?))", "%#{text}%", "%#{text}%", "%#{text}%")
   end
 
 

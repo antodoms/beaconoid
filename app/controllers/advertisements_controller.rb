@@ -9,37 +9,25 @@ class AdvertisementsController < ApplicationController
 		end
 	end
 
-	def filter    
-    	$flag = true
-    	$x = params[:filter_text].to_s
-	    $y = params[:filter_tag]
-	    redirect_to advertisements_path   
+	def filter
+		#binding.pry    
+    	if params[:advertisement_search].present? && params[:advertisement_search][:filter].present?
+			redirect_to advertisements_path(:advertisement_search => params[:advertisement_search][:filter])
+		elsif params[:advertisement_search].present? && !params[:advertisement_search][:filter].present?
+			redirect_to advertisements_path(:advertisement_search => "")
+		else
+			@advertisement = Advertisement.filter_by_name(params[:term]).paginate(page: params[:page], per_page: 10)
+			render json: @advertisement.map(&:name)
+		end
   	end
 
 	def index
-		#@advertisements = Advertisement.all
-		#authorize @advertisements
-
-		if $flag == true
-      		if $y == "advertisement_name"
-        		@advertisement = Advertisement.filter_by_advertisement_name("#{$x}") 
-      		elsif $y == "beacon_name"
-      			@beacon = Beacon.filter_by_beacon_name("#{$x}")
-        		@advertisement = Advertisement.filter_by_beacon_id(@beacon.first.id)
-      		elsif $y == "category_name"
-      			@category = Category.filter_by_category_name("#{$x}")
-        		@advertisement = Advertisement.filter_by_category_id(@category.first.id)
-      		end
-      		$flag = false 
-                          
-    	else
-      		@advertisement = Advertisement.all
-    	end
-    
+		if params[:advertisement_search].present?
+			@advertisement = Advertisement.filter_by_name(params[:advertisement_search]).paginate(page: params[:page], per_page: 10)
+		else
+			@advertisement = Advertisement.paginate(page: params[:page], per_page: 10)
+		end
     	authorize @advertisement
-
-    	@advertisement = @advertisement.paginate(page: params[:page], per_page: 10)
-		
 	end
 
 	def destroy
