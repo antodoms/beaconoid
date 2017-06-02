@@ -63,12 +63,9 @@ class CustomerTracking
 		final_data
 	end
 
-	def self.group_by_sale(action="click")
-		final_data = []
+	
 
-		ab = self.collection.aggregate([
-				{"$group": {"_id": "$store_id" }}				
-				])
+	def self.group_by_sale(action="with_beacon", time_from=Time.now-1.month, time_to=Time.now, page=1, limit=6)
 
 		store_with_beacon = []
 		store_without_beacon = []
@@ -92,10 +89,12 @@ class CustomerTracking
 			flag = false
 		end
 
-		if action == "click"
-			store_with_beacon
-		elsif action == "fetch"
-			store_without_beacon
+		skip = limit*(page-1)
+		if action == "with_beacon"
+			store_with_beacon[skip..limit-1]
+		elsif action == "without_beacon"
+			store_without_beacon[skip..limit-1]
+		
 		end
 				
 	end
@@ -117,7 +116,7 @@ class CustomerTracking
 					])
 			#binding.pry
 			ab.each do |c|
-				category_id = JSON.parse(c["_id"]).first.to_i
+				category_id = JSON.parse(c["_id"]).to_i
 				category = Category.find_by(id: category_id)
 				if category.present?
 					final_data << [category.name, c["count"].to_i,  category_id]

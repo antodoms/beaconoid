@@ -71,20 +71,20 @@ class ReportController < ApplicationController
   def sale
     authorize :report, :store?
 
-    if params[:click_page].present?
-      @store_with_beacon = CustomerTracking.group_by_sale("click")
+    if params[:with_beacon].present?
+      @store_with_beacon = CustomerTracking.group_by_sale("with_beacon", (Time.now-1.month), Time.now, params[:with_beacon].to_i)
     else
-      @store_with_beacon = CustomerTracking.group_by_sale("click")
+      @store_with_beacon = CustomerTracking.group_by_sale("with_beacon", (Time.now-1.month), Time.now)
     end
-    if params[:fetch_page].present?
-      @store_without_beacon = CustomerTracking.group_by_sale("fetch")
+    if params[:without_beacon].present?
+      @store_without_beacon = CustomerTracking.group_by_sale("without_beacon")
     else
-      @store_without_beacon = CustomerTracking.group_by_sale("fetch")
+      @store_without_beacon = CustomerTracking.group_by_sale("without_beacon")
     end
    
     #binding.pry
-    @click_data_count = 1 if !@click_data_count.present?
-    @fetch_data_count = 1 if !@fetch_data_count.present?
+    @store_with_beacon_count = 1 if !@click_data_count.present?
+    @store_without_beacon_count = 1 if !@fetch_data_count.present?
 
 
   end
