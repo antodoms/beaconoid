@@ -27,13 +27,12 @@
 						      <th>Category</th>
 						      <th>&nbsp;</th>
 						      <th>&nbsp;</th>
-						      <th>&nbsp;</th>
 						    </tr>
 						  </thead>
 						  <tbody>
 						    <% if @advertisement.size == 0 %>
 						      <tr>
-						        <td colspan="6">No advertisements found.</td>
+						        <td colspan="5">No advertisements found.</td>
 						      </tr>
 						    <% else %>
 						      <% @advertisement.each do |advertisement| %>
@@ -41,9 +40,6 @@
 						          <td><%= advertisement.name %></td>
 						          <td><%= advertisement.beacon.name if advertisement.beacon.present? %></td>
 						          <td><%= advertisement.category.name if advertisement.category.present? %></td>
-						          <td>
-						            <%= link_to "View", advertisement_path(advertisement), class: "btn btn-primary" %>
-						          </td>
 						          <td>
 						            <%= link_to "Edit", edit_advertisement_path(advertisement), class: "btn btn-default" %>
 						          </td>
