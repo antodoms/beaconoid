@@ -10,9 +10,25 @@ class StoresController < ApplicationController
     end
   end
   
+  def filter    
+    if params[:store_search].present? && params[:store_search][:filter].present?
+      redirect_to stores_path(:store_search => params[:store_search][:filter])
+    elsif params[:store_search].present? && !params[:store_search][:filter].present?
+      redirect_to stores_path(:store_search => "")
+    else
+      @store = Store.filter_by_name(params[:term]).paginate(page: params[:page], per_page: 10)
+      render json: @store.map(&:name)
+    end
+  end
+
   def index
-    @stores = Store.all
-    authorize @stores
+    if params[:store_search].present?
+      @store = Store.filter_by_name(params[:store_search]).paginate(page: params[:page], per_page: 10)
+    else
+      @store = Store.paginate(page: params[:page], per_page: 10)
+    end
+      authorize @store
+
   end
 
   def new

@@ -8,4 +8,14 @@ class Advertisement < ActiveRecord::Base
 
 
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
+  default_scope { order(created_at: :desc) }
+
+  def self.filter_by_name(text)
+    joins("INNER JOIN categories ON categories.id = advertisements.category_id").where("(LOWER(advertisements.name) like LOWER(?)) OR (LOWER(advertisements.description) like LOWER(?)) OR (LOWER(categories.name) like LOWER(?))", "%#{text}%", "%#{text}%", "%#{text}%")
+  end
+
+
 end
+
+WillPaginate.per_page = 10

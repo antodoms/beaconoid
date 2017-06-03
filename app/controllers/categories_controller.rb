@@ -9,9 +9,26 @@ class CategoriesController < ApplicationController
 		end
 	end
 
+	def filter	
+		if params[:category_search].present? && params[:category_search][:filter].present?
+			redirect_to categories_path(:category_search => params[:category_search][:filter])
+		elsif params[:category_search].present? && !params[:category_search][:filter].present?
+			redirect_to categories_path(:category_search => "")
+		else
+			@categories = Category.filter_by_name(params[:term]).paginate(page: params[:page], per_page: 10)
+			render json: @categories.map(&:name)
+		end
+	end
+
+
 	def index
-		@categories = Category.all
-		authorize @categories
+		#binding.pry
+		if params[:category_search].present?
+			@category = Category.filter_by_name(params[:category_search]).paginate(page: params[:page], per_page: 10)
+		else
+			@category = Category.paginate(page: params[:page], per_page: 10)
+		end
+		authorize @category
 	end
 
 	def new

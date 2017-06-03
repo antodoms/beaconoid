@@ -1,12 +1,24 @@
 class BeaconsController < ApplicationController
 	def user_not_authorized
-		flash[:error] = "You are not authorized to perform this action."
+		flash[:xerror] = "You are not authorized to perform this action."
 		if policy(:beacon).index?
 		  redirect_to beacons_path
 		else
 		  redirect_to dashboard_path
 		end
 	end
+
+  def filter    
+    if params[:beacon_search].present? && params[:beacon_search][:filter].present?
+      redirect_to beacons_path(:beacon_search => params[:beacon_search][:filter])
+    elsif params[:beacon_search].present? && !params[:beacon_search][:filter].present?
+      redirect_to beacons_path(:beacon_search => "")
+    else
+      @beacon = Beacon.filter_by_name(params[:term]).paginate(page: params[:page], per_page: 10)
+      render json: @beacon.map(&:name)
+    end
+  end
+		
 
 	def create_request
 		Typhoeus::Request.new(
@@ -20,6 +32,7 @@ class BeaconsController < ApplicationController
 	        "User-Agent" => "beaconoid/1.0"
 	      }
 	    )
+
 	end
 
 	def index
@@ -43,7 +56,12 @@ class BeaconsController < ApplicationController
 			end
 		end
 
-		@other_list = Beacon.where.not(:id => @registered_list.pluck(:id))
+		if params[:beacon_search].present?
+			@other_list = Beacon.filter_by_name(params[:beacon_search]).where.not(:id => @registered_list.pluck(:id)).paginate(page: params[:page], per_page: 10)
+		else
+			@other_list = Beacon.where.not(:id => @registered_list.pluck(:id)).paginate(page: params[:page], per_page: 10)
+		end
+
 
 		authorize @other_list
 	end

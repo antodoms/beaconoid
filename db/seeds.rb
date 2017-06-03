@@ -9,7 +9,7 @@
 @user = User.find_by(:email => "antodoms@gmail.com")
 
 if @user.present?
-	@user.update(:role => "Admin")
+	@user.update(:role => "Super Admin")
 else
 	User.create(:email => "antodoms@gmail.com", :password => "password", :password_confirmation => "password", :role => "Admin")
 end
@@ -57,23 +57,23 @@ end
 date1 = Time.now
 date2 = Time.now - 1.year
 
-CustomerTracking.destroy_all
-if CustomerTracking.count < 100000
-	(1..50000).each do |x|
-		customer = Customer.pluck(:id).sample
-		advertisement = Advertisement.all.sample
-		beacon = advertisement.beacon
-		time = Time.at((date2.to_f - date1.to_f)*rand + date1.to_f)
-		CustomerTracking.create(customer_id: customer, category_id: advertisement.category_id, store_id: beacon.store_id, advertisement_id: advertisement.id, beacon_id: beacon.id, action: "click", time: time)
+# CustomerTracking.destroy_all
+# if CustomerTracking.count < 100000
+# 	(1..50000).each do |x|
+# 		customer = Customer.pluck(:id).sample
+# 		advertisement = Advertisement.all.sample
+# 		beacon = advertisement.beacon
+# 		time = Time.at((date2.to_f - date1.to_f)*rand + date1.to_f)
+# 		CustomerTracking.create(customer_id: customer, category_id: advertisement.category_id, store_id: beacon.store_id, advertisement_id: advertisement.id, beacon_id: beacon.id, action: "click", time: time)
 
-	end
+# 	end
 
-	(1..100000).each do |x|
-		customer = Customer.pluck(:id).sample
-		beacon = Beacon.all.sample
-		advertisements = beacon.advertisements
-		time = Time.at((date2.to_f - date1.to_f)*rand + date1.to_f)
-		CustomerTracking.create(customer_id: customer, category_id: advertisements.pluck(:category_id), store_id: beacon.store_id, advertisement_id: advertisements.pluck(:id), beacon_id: beacon.id, action: "fetch", time: time)
-	end
-end
+# 	(1..100000).each do |x|
+# 		customer = Customer.pluck(:id).sample
+# 		beacon = Beacon.all.sample
+# 		advertisements = beacon.advertisements
+# 		time = Time.at((date2.to_f - date1.to_f)*rand + date1.to_f)
+# 		CustomerTracking.create(customer_id: customer, category_id: advertisements.pluck(:category_id), store_id: beacon.store_id, advertisement_id: advertisements.pluck(:id), beacon_id: beacon.id, action: "fetch", time: time)
+# 	end
+# end
 

@@ -7,9 +7,16 @@
                 <div class="container-fluid">
             		<h1 class="page-header" id="k"> Beacons </h1>	
 					<div class="well">
-					  <%= link_to "New Beacon", new_beacon_path, class: "btn btn-primary" %>
+					    <%= form_tag beacon_filter_path, class: "col-md-6 pull-left" do %>
+			              <div class="form-group col-md-10">
+			                <%= text_field :beacon_search, :filter, data: { autocomplete_source: beacon_filter_path }, class: "form-control beacon-search-input" %>            
+			              </div>
+			              <%= submit_tag 'Search', class: "btn btn-primary col-md-2 beacon-search-submit" %>
+			            <% end %>
+					  	<%= link_to "New Beacon", new_beacon_path, class: "btn btn-primary col-md-2 pull-right" %>
 					</div>
 
+                    <!-- Top Row with Charts -->
 					<h3 style="float: left;">Unregistered List from Kontakt</h3>
 					<table class="table table-bordered table-striped" id="unregistered-list">
 					  <thead>
@@ -37,9 +44,8 @@
 					    <% end %>
 					  </tbody>
 					</table>
-
 					<br>
-
+					
 					<h3>Registered List from Kontakt</h3>
 					<table class="table table-bordered table-striped" id="registered-list">
 					  <thead>

@@ -8,41 +8,48 @@
           <!-- Top Row with Charts -->
           <h1 class="page-header" id="k"> Categories </h1>
           <div class="well">
-            <%= link_to "New Category", new_category_path, class: "btn btn-primary" %>
+            <%= form_tag category_filter_path, class: "col-md-6 pull-left" do %>
+              <div class="form-group col-md-10">
+                <%= text_field :category_search, :filter, data: { autocomplete_source: category_filter_path }, class: "form-control category-search-input" %>            
+              </div>
+              <%= submit_tag 'Search', class: "btn btn-primary col-md-2 category-search-submit" %>
+            <% end %>
+            <%= link_to "New Category", new_category_path, class: "btn btn-primary col-md-2 pull-right" %>
           </div>
 
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Category</th>
                 <th>Description</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
-            <tbody>
-              <% if @categories.size == 0 %>
-                <tr>
-                  <td colspan="6">No categories found.</td>
-                </tr>
-              <% else %>
-                <% @categories.each do |category| %>
+              <tbody>
+                <% if @category.size == 0 %>
                   <tr>
-                    <td><%= category.id %></td>
-                    <td><%= category.name %></td>
-                    <td><%= category.description %></td>
-                    <td>
-                      <%= link_to "Edit", edit_category_path(category), class: "btn btn-default" %>
-                    </td>
-                    <td>
-                      <%= button_to "Delete", category, method: :delete, data: { confirm: "Are you sure you wish to delete #{category.name} ?" }, class: "btn btn-danger" %>
-                    </td>
+                    <td colspan="6">No categories found.</td>
                   </tr>
-                <% end %>
+                <% else %>
+                  <% @category.each do |category| %>
+                    <tr>
+                      <td><%= category.name %></td>
+                      <td><%= category.description %></td>
+                      <td>
+                        <%= link_to "Edit", edit_category_path(category), class: "btn btn-default" %>
+                      </td>
+                      <td>
+                        <%= button_to "Delete", category, method: :delete, data: { confirm: "Are you sure you wish to delete #{category.name} ?" }, class: "btn btn-danger" %>
+                      </td>
+                    </tr>
+                  <% end %>
               <% end %>
             </tbody>
           </table>
+          <ul class="pagination">
+            <%= will_paginate @category, container: false %>
+          </ul>
         </div>
       </div>
     </div>

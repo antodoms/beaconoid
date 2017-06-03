@@ -5,44 +5,60 @@
         	<%= render "shared/flash_message" %>
 	        <div id="page-wrapper">
                 <div class="container-fluid">
-                	<h1 class="page-header" id="k"> Advertisements </h1>
-                    <!-- Top Row with Charts -->	
-					<div class="well">
-					  <%= link_to "New Advertisement", new_advertisement_path, class: "btn btn-primary" %>
-					</div>
-					<table class="table table-bordered table-striped">
-					  <thead>
-					    <tr>
-					      <th>Name</th>
-					      <th>Beacon</th>
-					      <th>Category</th>
-					      <th>&nbsp;</th>
-					      <th>&nbsp;</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <% if @advertisements.size == 0 %>
-					      <tr>
-					        <td colspan="6">No advertisements found.</td>
-					      </tr>
-					    <% else %>
-					      <% @advertisements.each do |advertisement| %>
-					        <tr>
-					          <td><%= advertisement.name %></td>
-					          <td><%= advertisement.beacon.name if advertisement.beacon.present? %></td>
-					          <td><%= advertisement.category.name if advertisement.category.present? %></td>
-					          <td>
-					            <%= link_to "Edit", edit_advertisement_path(advertisement), class: "btn btn-default" %>
-					          </td>
-					          <td>
-					            <%= button_to "Delete", advertisement, method: :delete, data: { confirm: "Are you sure you wish to delete #{advertisement.name} ?" }, class: "btn btn-danger" %>
-					          </td>
-					        </tr>
-					      <% end %>
-					    <% end %>
-					  </tbody>
-					</table>
-				</div>
+                   <!-- Top Row with Charts -->
+                    <h1 class="page-header" id="k"> Advertisements </h1>
+
+						<div class="well">
+							<%= form_tag advertisement_filter_path, class: "col-md-6 pull-left" do %>
+					            <div class="form-group col-md-10">
+					              	<%= text_field :advertisement_search, :filter, data: { autocomplete_source: advertisement_filter_path }, class: "form-control category-search-input" %> 
+					            </div>
+					            <%= submit_tag 'Search', class: "btn btn-primary col-md-2 category-search-submit" %>
+					        <% end %>
+						  <%= link_to "New Advertisement", new_advertisement_path, class: "btn btn-primary col-md-2 pull-right" %>
+						</div>
+
+
+						<table class="table table-bordered table-striped">
+						  <thead>
+						    <tr>
+						      <th>Name</th>
+						      <th>Beacon</th>
+						      <th>Category</th>
+						      <th>&nbsp;</th>
+						      <th>&nbsp;</th>
+						      <th>&nbsp;</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <% if @advertisement.size == 0 %>
+						      <tr>
+						        <td colspan="6">No advertisements found.</td>
+						      </tr>
+						    <% else %>
+						      <% @advertisement.each do |advertisement| %>
+						        <tr>
+						          <td><%= advertisement.name %></td>
+						          <td><%= advertisement.beacon.name if advertisement.beacon.present? %></td>
+						          <td><%= advertisement.category.name if advertisement.category.present? %></td>
+						          <td>
+						            <%= link_to "View", advertisement_path(advertisement), class: "btn btn-primary" %>
+						          </td>
+						          <td>
+						            <%= link_to "Edit", edit_advertisement_path(advertisement), class: "btn btn-default" %>
+						          </td>
+						          <td>
+						            <%= button_to "Delete", advertisement, method: :delete, data: { confirm: "Are you sure you wish to delete #{advertisement.name} ?" }, class: "btn btn-danger" %>
+						          </td>
+						        </tr>
+						      <% end %>
+						    <% end %>
+						  </tbody>
+						</table>
+						<ul class="pagination">
+          					<%= will_paginate @advertisement, container: false %>
+          				</ul>
+				
 			</div>
 		</div>
 	</div>
