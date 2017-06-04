@@ -116,7 +116,7 @@ class CustomerTracking
 					])
 			#binding.pry
 			ab.each do |c|
-				category_id = JSON.parse(c["_id"]).to_i
+				category_id = JSON.parse(c["_id"]).first
 				category = Category.find_by(id: category_id)
 				if category.present?
 					final_data << [category.name, c["count"].to_i,  category_id]
