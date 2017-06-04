@@ -30,7 +30,7 @@
 							      <% @click_data_category.each do |category| %>
 							      	<tr>
 							      		<td style="text-align: left"><%= category[2] %></td>
-	                            		<td style="text-align: left"><%= link_to "#{category[0]}", category_path(id: category[2]) %></td>
+	                            		<td style="text-align: left"><%= link_to "#{category[0]}", edit_category_path(id: category[2]) %></td>
 	                            		<td style="text-align: left"><%= category[1] %></td>
 	                            	</tr>
 	                            <% end %>
