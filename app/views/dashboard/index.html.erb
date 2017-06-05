@@ -2,79 +2,35 @@
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">
-                Dashboard
-                <small>Welcome to the beacon management portal</small>
-            </h1>
-			<%= render "shared/flash_message" %>
-	        <div id="page-wrapper">
-
+            <h1 class="page-header" id="k"> Hello <%= current_user.name %>!</h1>
+            <%= render "shared/flash_message" %>
+            <div class="wrapper">
                 <div class="container-fluid">
-
-                    <!-- Top Row with Charts -->
-                    <div class="row">		
-                    	<div class="col-lg-12">
-                                <h2 class="page-header">Monthly Click and Fetch Report</h2>
-                                <p class="lead">A detailed analysis of Beacon usage and application for this month</a>.</p>
-                            </div>			
-                    	</div>
-                    	<div class="row">		
-                    		<div class="col-lg-4">
-                                <div class="panel panel-green">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Beacon Data Fetch Bar Graph</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="flot-chart">
-                                            <div class="flot-chart-content" id="flot-pie-chart">
-                                                <%= bar_chart @fetch_data, width: 500 %>
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="well">
+                        <div class="col-lg-12">
+                            <div class="image col-lg-6 pull-left"> 
+                                <img class="img-responsive" src="<%= asset_path('logo') %>" alt="Chania">
                             </div>
-                    			
-                    		
-                    		<div class="col-lg-6">
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Beacon Advertisement Click Graph</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="flot-chart">
-                                            <div class="flot-chart-content" id="flot-bar-chart">
-                                                <%= bar_chart @click_data, width: 500 %>
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    	</div>	
-                		<!-- Bottom Row with Stores -->
+                            <div class="col-lg-6 pull-right">
+                            <br><br><br><br>
+                                <p class="lead" style="text-align: justify;"> Welcome to the Beacon Management Portal where we bring the deals to you. This software is used to manage beacons with the latest advertisements and deals based on different categories and stores. </p>
+                            </div>                            
+                        </div>
+                        
+                    </div>
                     
-                    	<div class="row">		
-                    	    <div class="col-lg-12">
-                                <h2 class="page-header">Stores</h2>
-                                <p class="lead">Current stores applying this innovative technology</a>.</p>
-                            </div>			
-                    	</div>
-                	    <div class="row">		
-                        	<img src="<%= asset_path('coles') %>" alt="Coles" style="width:304px;height:228px;">
-                        	&emsp;
-                        	<img src="<%= asset_path('woolworths') %>" alt="Woolworths" style="width:304px;height:228px;">
-                        	&emsp;
-                        	<img src="<%= asset_path('aldi') %>" alt="Aldi" style="width:304px;height:228px;">
-                        </div>			
-                	</div>		
                 </div>
             </div>
-        </div>
-        <!-- /.container-fluid -->
+		</div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="embed-responsive embed-responsive-16by9" >
+                <center><iframe class="embed-responsive-item" src="//www.youtube.com/embed/ePbKGoIGAXY"></iframe></center>
+            </div>
+        </div>
+        
+    </div>
+
 </div>

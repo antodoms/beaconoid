@@ -1,8 +1,8 @@
 <div class="container-fluid">
   	<div class="row">		
     	<div class="col-lg-12">
-                <h2 class="page-header">Monthly Sale Report</h2>
-                <p class="lead">A detailed analysis of Sale in Stores with beacons and Stores without beacons</a>.</p>
+                <h2 class="page-header">Monthly Store Sale Report</h2>
+                <p class="lead">A comparison of Sale in Stores with Beacons and Sale in Stores without Beacons</a></p>
             </div>			
     	</div>
     	<div class="row">		
@@ -30,7 +30,7 @@
 							      <% @store_without_beacon.each do |store| %>
 							      	<tr>
 							      		<td style="text-align: left"><%= store[2] %></td>
-	                            		<td style="text-align: left"><%= link_to "#{store[0]}", store_path(id: store[2]) %></td>
+	                            		<td style="text-align: left"><%= link_to "#{store[0]}", edit_store_path(id: store[2]) %></td>
 	                            		<td style="text-align: left"><%= store[1] %></td>
 	                            	</tr>
 	                            <% end %>
@@ -38,8 +38,8 @@
 							</table>
 
                             <ul class="pagination">
-                                <% (1..@fetch_data_count).each do |x| %>
-                                  <li><%= link_to x, report_store_path(:click_page => params[:click_page], :fetch_page => x) %></li>
+                                <% (1..@store_without_beacon.count).each do |x| %>
+                                  <li><%= link_to x, report_sales_path(:with_beacon => params[:with_beacon], :without_beacon => x) %></li>
                                 <% end %>
                             </ul>
 
@@ -73,7 +73,7 @@
                                   <% @store_with_beacon.each do |store| %>
                                     <tr>
                                         <td style="text-align: left"><%= store[2] %></td>
-                                        <td style="text-align: left"><%= link_to "#{store[0]}", store_path(id: store[2]) %></td>
+                                        <td style="text-align: left"><%= link_to "#{store[0]}", edit_store_path(id: store[2]) %></td>
                                         <td style="text-align: left"><%= store[1] %></td>
                                     </tr>
                                 <% end %>
@@ -81,8 +81,8 @@
                             </table>
 
                             <ul class="pagination">
-                                <% (1..@click_data_count+1).each do |x| %>
-                                  <li><%= link_to x,report_store_path(:click_page => x, :fetch_page => params[:fetch_page]) %></li>
+                                <% (1..@store_with_beacon.count+1).each do |x| %>
+                                  <li><%= link_to x,report_sales_path(:with_beacon => x, :fetch_page => params[:without_beacon]) %></li>
                                 <% end %>
                             </ul>
 

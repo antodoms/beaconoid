@@ -8,23 +8,6 @@
 
         </li>
 
-        <% if policy(:report).index? %>
-            <li class="<%= 'active' if controller_name == 'report' %>">
-                <a href="<%= report_path %>"><i class="fa fa-fw fa-dashboard"></i> Report</a>
-                <ul>
-                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'store') %>"> 
-                        <a href="<%= report_store_path %>"><i class="fa fa-fw fa-table"></i> Store</a>
-                    </li>
-                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'sale') %>"> 
-                        <a href="<%= report_sales_path %>"><i class="fa fa-fw fa-table"></i> Sales </a> 
-                    </li>
-                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'category') %>">
-                        <a href="<%= report_category_path %>"><i class="fa fa-fw fa-table"></i>Category</a>\
-                    </li>
-                </ul>
-            </li>
-        <% end %>
-
         <% if policy(Store).index? %>
 
             <li class="<%= 'active' if controller_name == 'stores' %>">
@@ -65,15 +48,36 @@
 
         <% end %>
 
+        <% if policy(:report).index? %>
+            <li class="<%= 'active' if controller_name == 'report' %>">
+                <a href="<%= report_path %>"><i class="fa fa-fw fa-dashboard"></i> Report</a>
+                <ul>
+                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'store') %>"> 
+                        <a href="<%= report_store_path %>"><i class="fa fa-fw fa-table"></i> Store</a>
+                    </li>
+                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'sale') %>"> 
+                        <a href="<%= report_sales_path %>"><i class="fa fa-fw fa-table"></i> Store Sales </a> 
+                    </li>
+                    <li class="<%= 'active' if (controller_name == 'report' && action_name == 'category') %>">
+                        <a href="<%= report_category_path %>"><i class="fa fa-fw fa-table"></i> Category</a>\
+                    </li>
+                </ul>
+            </li>
+        <% end %>
+
+        
+
         <% if policy(User).index? %>
 
             <li class="<%= 'active' if controller_name == 'staffs' %>">
 
-                <a href="<%= staffs_path %>"><i class="fa fa-fw fa-user"></i> Staffs</a>
+                <a href="<%= staffs_path %>"><i class="fa fa-fw fa-user"></i> Staff</a>
 
             </li>
 
         <% end %>
+
+       
 
     </ul>
 
