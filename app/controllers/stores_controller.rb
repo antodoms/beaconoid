@@ -71,7 +71,7 @@ class StoresController < ApplicationController
     end
 
     flash[:error] = @store.validate.html_safe
-    redirect_to edit_store_path
+    redirect_to edit_store_path(@store)
   end
 
   def destroy

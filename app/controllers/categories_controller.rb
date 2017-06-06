@@ -68,7 +68,7 @@ class CategoriesController < ApplicationController
 	      	redirect_to categories_path, notice: "#{@category.name} has been updated!" and return
 	    else
 	    	flash[:error] = @category.validate
-	    	redirect_to edit_category_path
+	    	redirect_to edit_category_path(@category)
 	    end
 	  end
 

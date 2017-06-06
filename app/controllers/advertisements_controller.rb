@@ -71,7 +71,7 @@ class AdvertisementsController < ApplicationController
       		redirect_to edit_advertisement_path(@advertisement)
    		else
       		flash[:error] = @advertisement.validate
-      		redirect_to new_beacon_path
+      		redirect_to new_advertisement_path
    		end
 	end
 
@@ -89,10 +89,10 @@ class AdvertisementsController < ApplicationController
    		if @advertisement.update_attributes(advertisement_params)
    			@advertisements = Advertisement.all
       		#redirect_to beacon_path(@advertisement.beacon)
-      		redirect_to edit_beacon_path
+      		redirect_to edit_advertisement_path(@advertisement)
    		else
       		flash[:error] = @advertisement.validate
-      		redirect_to edit_beacon_path
+      		redirect_to edit_advertisement_path(@advertisement)
    		end
    
 	end

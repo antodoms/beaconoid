@@ -127,7 +127,7 @@ class BeaconsController < ApplicationController
       		redirect_to :action => 'index'
    		else
    			flash[:error] = @beacon.validate
-      		redirect_to edit_beacon_path
+      		redirect_to edit_beacon_path(@beacon)
    		end
    
 	end

@@ -57,7 +57,7 @@ class StaffsController < ApplicationController
       redirect_to staffs_path, notice: "#{@user.name} has been updated!" and return
     else
       flash[:error] = @user.validate
-      redirect_to edit_staff_path
+      redirect_to edit_staff_path(@user)
     end
   end
 
