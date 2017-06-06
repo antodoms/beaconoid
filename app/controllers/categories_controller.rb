@@ -49,10 +49,10 @@ class CategoriesController < ApplicationController
 		      message: [0,0,0,0,1,0],
 		      user: current_user.id
 	      redirect_to categories_path, notice: "The Category has been created!" and return
+	    else
+	    	flash[:error] = @category.validate.html_safe
+	    	redirect_to new_category_path
 	    end
-
-		flash[:message] = "Sorry we can't add this category. Category with same name exists."
-	    render 'new'
 	end
 
 	  def edit
@@ -66,9 +66,10 @@ class CategoriesController < ApplicationController
 
 	    if @category.update_attributes(category_params)
 	      	redirect_to categories_path, notice: "#{@category.name} has been updated!" and return
+	    else
+	    	flash[:error] = @category.validate.html_safe
+	    	redirect_to edit_category_path
 	    end
-	    flash[:error] = @category.errors.full_messages.to_sentence
-	    render 'edit'
 	  end
 
 	  def destroy
