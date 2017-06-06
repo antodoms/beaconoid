@@ -50,7 +50,7 @@ class CategoriesController < ApplicationController
 		      user: current_user.id
 	      redirect_to categories_path, notice: "The Category has been created!" and return
 	    else
-	    	flash[:error] = @category.validate.html_safe
+	    	flash[:error] = @category.validate
 	    	redirect_to new_category_path
 	    end
 	end
@@ -67,7 +67,7 @@ class CategoriesController < ApplicationController
 	    if @category.update_attributes(category_params)
 	      	redirect_to categories_path, notice: "#{@category.name} has been updated!" and return
 	    else
-	    	flash[:error] = @category.validate.html_safe
+	    	flash[:error] = @category.validate
 	    	redirect_to edit_category_path
 	    end
 	  end

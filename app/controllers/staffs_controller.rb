@@ -34,7 +34,7 @@ class StaffsController < ApplicationController
     if (User::USER_ROLES.include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "The User has been created!" and return
     else
-      flash[:error] = @user.validate.html_safe
+      flash[:error] = @user.validate
       redirect_to new_staff_path
     end
   end
@@ -56,7 +56,7 @@ class StaffsController < ApplicationController
     if (User.get_roles(current_user).include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "#{@user.name} has been updated!" and return
     else
-      flash[:error] = @user.validate.html_safe
+      flash[:error] = @user.validate
       redirect_to edit_staff_path
     end
   end
