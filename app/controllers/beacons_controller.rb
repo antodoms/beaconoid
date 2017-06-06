@@ -91,8 +91,8 @@ class BeaconsController < ApplicationController
    		if @beacon.save
       		redirect_to beacons_path, notice: "#{@beacon.name} has been created succesfully" and return
    		else
-   			flash[:error] = @beacon.errors.full_messages.to_sentence
-      		render :action => 'new'
+   			flash[:error] = @beacon.validate.html_safe
+      		redirect_to new_beacon_path
    		end
 	end
 
@@ -126,8 +126,8 @@ class BeaconsController < ApplicationController
    		if @beacon.update_attributes(beacon_params)
       		redirect_to :action => 'index'
    		else
-   			flash[:error] = @beacon.errors.full_messages.to_sentence
-      		render :action => 'edit'
+   			flash[:error] = @beacon.validate.html_safe
+      		redirect_to edit_beacon_path
    		end
    
 	end

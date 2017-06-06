@@ -1,7 +1,7 @@
-class Beacon < ActiveRecord::Base
+class Beacon < ApplicationRecord
   #include Mongoid::Document
 
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :unique_reference
 
   belongs_to :store
   has_many :advertisements
