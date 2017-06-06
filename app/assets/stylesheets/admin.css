@@ -119,6 +119,10 @@ ul.alert-dropdown {
     width: 200px;
 }
 
+.alert-danger {
+    margin-top: 50px;
+}
+
 /* Side Navigation */
 
 @media(min-width:768px) {

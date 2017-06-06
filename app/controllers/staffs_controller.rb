@@ -26,20 +26,21 @@ class StaffsController < ApplicationController
   end
 
   def create
-    
     # @user.password = "password"
     # @user.password_confirmation = "password"
-
-    if(User.find_by(params[:id]))
-      redirect_to new_staff_path, notice: "User email ID already exists" and return
-    end
     @user = User.new(user_params)
     authorize @user
 
     if (User::USER_ROLES.include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "The User has been created!" and return
     end
-    flash[:error] = "Password and Password Confirmation do not match. Please confirm the password."
+    
+    error = ""
+    @user.errors.full_messages.each do |err|
+      error << ((err.present? && error.present?)? "<br>#{err}" : "#{err}")
+    end
+    flash[:error] = error.html_safe
+
     redirect_to new_staff_path
   end
 
@@ -60,12 +61,13 @@ class StaffsController < ApplicationController
     if (User.get_roles(current_user).include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "#{@user.name} has been updated!" and return
     end
+    
     error = ""
     @user.errors.full_messages.each do |err|
       error << ((err.present? && error.present?)? "<br>#{err}" : "#{err}")
     end
     flash[:error] = error.html_safe
-    render 'edit'
+    redirect_to edit_staff_path
   end
 
   def destroy
