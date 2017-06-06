@@ -5,3 +5,38 @@
 @import "store";
 @import "advertisement";
 @import "jquery-ui/autocomplete";
+
+.ui-menu .ui-menu-item a{
+    color: #96f226;
+    border-radius: 0px;
+    border: 1px solid #454545;
+}
+
+ul.ui-autocomplete {
+    background: white;
+    border-radius: 0px;
+    border: 1px solid #66afe9;
+    padding: 0px;
+}
+
+ul.ui-autocomplete li.ui-menu-item {
+	list-style: none;
+}
+
+ul.ui-autocomplete li.ui-menu-item:hover {
+	color: green;
+}
+
+.ui-state-active {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #0088cc;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    background-image: none;
+}
+
+.ui-menu-item-wrapper {
+    padding: 5px 10px;
+}
