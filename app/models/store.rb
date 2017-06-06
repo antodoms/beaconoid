@@ -1,4 +1,4 @@
-class Store < ActiveRecord::Base
+class Store < ApplicationRecord
 	validates_uniqueness_of :name
 	has_many :beacons
 
@@ -6,7 +6,6 @@ class Store < ActiveRecord::Base
 	def self.filter_by_name(text)
 		where("(LOWER(name) like LOWER(?))", "%#{text}%")
 	end
-
 
 end
 

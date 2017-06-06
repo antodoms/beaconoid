@@ -74,17 +74,17 @@ class ReportController < ApplicationController
     if params[:with_beacon].present?
       @store_with_beacon = CustomerTracking.group_by_sale("with_beacon", (Time.now-1.month), Time.now, params[:with_beacon].to_i)
     else
-      @store_with_beacon = CustomerTracking.group_by_sale("with_beacon", (Time.now-1.month), Time.now)
+      @store_with_beacon = CustomerTracking.group_by_sale("with_beacon", (Time.now-1.month), Time.now, params[:with_beacon].to_i)
     end
     if params[:without_beacon].present?
-      @store_without_beacon = CustomerTracking.group_by_sale("without_beacon")
+      @store_without_beacon = CustomerTracking.group_by_sale("without_beacon", (Time.now-1.month), Time.now, params[:without_beacon].to_i)
     else
-      @store_without_beacon = CustomerTracking.group_by_sale("without_beacon")
+      @store_without_beacon = CustomerTracking.group_by_sale("without_beacon", (Time.now-1.month), Time.now, params[:without_beacon].to_i)
     end
    
     #binding.pry
-    @store_with_beacon_count = 1 if !@click_data_count.present?
-    @store_without_beacon_count = 1 if !@fetch_data_count.present?
+   # @store_with_beacon_count = 1 if !@click_data_count.present?
+    #@store_without_beacon_count = 1 if !@fetch_data_count.present?
 
 
   end

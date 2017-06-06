@@ -1,8 +1,9 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   extend Devise::Models
   devise :database_authenticatable, :registerable, stretches: 12
 
   validates :password, :presence => { :on => :create }, :length   => { :minimum => 6, :allow_nil => true }, :confirmation => true
+  validates_uniqueness_of :email
 
   USER_ROLES= ["Admin","Store Manager","Beacon Manager", "User Report Manager"]
   SUPER_USER_ROLES = ["Super Admin","Admin","Store Manager","Beacon Manager", "User Report Manager"]

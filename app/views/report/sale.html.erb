@@ -82,7 +82,7 @@
 
                             <ul class="pagination">
                                 <% (1..@store_with_beacon.count+1).each do |x| %>
-                                  <li><%= link_to x,report_sales_path(:with_beacon => x, :fetch_page => params[:without_beacon]) %></li>
+                                  <li><%= link_to x,report_sales_path(:with_beacon => x, :with_beacon => params[:with_beacon]) %></li>
                                 <% end %>
                             </ul>
 

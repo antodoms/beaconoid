@@ -77,7 +77,13 @@
 
         <% end %>
 
-       
+
+        <li class="<%= 'active' if controller_name == 'about' %>">
+
+            <a href="<%= about_path %>"><i class="fa fa-fw fa-user"></i> About </a>
+
+        </li>   
+        
 
     </ul>
 

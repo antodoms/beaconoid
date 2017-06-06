@@ -51,9 +51,10 @@ class StoresController < ApplicationController
         user: current_user.id
 
       redirect_to stores_path, notice: "The Store has been created!" and return
+    else
+      flash[:error] = @store.validate.html_safe
+      redirect_to new_store_path
     end
-    flash[:error] = "Sorry we can't add this store. Store with same name exists."
-    render 'new'
   end
 
   def edit
@@ -69,7 +70,8 @@ class StoresController < ApplicationController
       redirect_to stores_path, notice: "#{@store.name} has been updated!" and return
     end
 
-    render 'edit'
+    flash[:error] = @store.validate.html_safe
+    redirect_to edit_store_path
   end
 
   def destroy

@@ -70,7 +70,8 @@ class AdvertisementsController < ApplicationController
    			@advertisements = Advertisement.all
       		redirect_to edit_advertisement_path(@advertisement)
    		else
-      		render :action => 'new'
+      		flash[:error] = @advertisement.validate.html_safe
+      		redirect_to new_beacon_path
    		end
 	end
 
@@ -88,9 +89,10 @@ class AdvertisementsController < ApplicationController
    		if @advertisement.update_attributes(advertisement_params)
    			@advertisements = Advertisement.all
       		#redirect_to beacon_path(@advertisement.beacon)
-      		redirect_to :action => 'edit'
+      		redirect_to edit_beacon_path
    		else
-      		render :action => 'edit'
+      		flash[:error] = @advertisement.validate.html_safe
+      		redirect_to edit_beacon_path
    		end
    
 	end

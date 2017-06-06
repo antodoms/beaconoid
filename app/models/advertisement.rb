@@ -1,4 +1,4 @@
-class Advertisement < ActiveRecord::Base
+class Advertisement < ApplicationRecord
   #include Mongoid::Document
   belongs_to :beacon
   belongs_to :category
