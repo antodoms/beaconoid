@@ -26,15 +26,21 @@ class StaffsController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    authorize @user
+    
     # @user.password = "password"
     # @user.password_confirmation = "password"
+
+    if(User.find_by(params[:id]))
+      redirect_to new_staff_path, notice: "User email ID already exists" and return
+    end
+    @user = User.new(user_params)
+    authorize @user
 
     if (User::USER_ROLES.include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "The User has been created!" and return
     end
-    render 'new'
+    flash[:error] = "Password and Password Confirmation do not match. Please confirm the password."
+    redirect_to new_staff_path
   end
 
   def edit
