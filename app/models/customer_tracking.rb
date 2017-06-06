@@ -89,6 +89,7 @@ class CustomerTracking
 			flag = false
 		end
 
+		page = 1
 		skip = limit*(page-1)
 		if action == "with_beacon"
 			store_with_beacon[skip..limit-1]
