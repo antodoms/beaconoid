@@ -11,17 +11,15 @@ WORKDIR $INSTALL_PATH
 
 COPY Gemfile Gemfile.lock ./
 
-RUN bundle install --binstubs
+RUN bundle install
 
 COPY . .
 
+RUN bundle exec rake RAILS_ENV=production DATABASE_URL=postgresql://user:pass@127.0.0.1/beacon_web_console_production SECRET_TOKEN=5395b86a5ba1eb25e4aaa26c0212f8ee3a84dd508794216e737f3a8b2ef64644bc4c126e4027042bae6f06c77794986d3a0b3f498d30f14413ecafc40af4210d assets:precompile
+
 VOLUME ["$INSTALL_PATH/public"]
 
-ADD . /beaconoid
-ADD Gemfile /beaconoid/Gemfile
-ADD Gemfile.lock /beaconoid/Gemfile.lock
-
-RUN rails s -p 80
+CMD bundle exec unicorn -c config/unicorn/staging.rb
 #ADD . /beaconoid
 
 #EXPOSE 80
