@@ -33,15 +33,10 @@ class StaffsController < ApplicationController
 
     if (User::USER_ROLES.include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "The User has been created!" and return
+    else
+      flash[:error] = @user.validate.html_safe
+      redirect_to new_staff_path
     end
-    
-    error = ""
-    @user.errors.full_messages.each do |err|
-      error << ((err.present? && error.present?)? "<br>#{err}" : "#{err}")
-    end
-    flash[:error] = error.html_safe
-
-    redirect_to new_staff_path
   end
 
   def edit
@@ -60,14 +55,10 @@ class StaffsController < ApplicationController
 
     if (User.get_roles(current_user).include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "#{@user.name} has been updated!" and return
+    else
+      flash[:error] = @user.validate.html_safe
+      redirect_to edit_staff_path
     end
-    
-    error = ""
-    @user.errors.full_messages.each do |err|
-      error << ((err.present? && error.present?)? "<br>#{err}" : "#{err}")
-    end
-    flash[:error] = error.html_safe
-    redirect_to edit_staff_path
   end
 
   def destroy

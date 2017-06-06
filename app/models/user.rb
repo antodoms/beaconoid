@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   extend Devise::Models
   devise :database_authenticatable, :registerable, stretches: 12
 
