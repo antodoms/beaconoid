@@ -1,4 +1,4 @@
-root = "/beaconoid"
+root = "/"
 working_directory root
 
 pid "#{root}/tmp/pids/unicorn.pid"

@@ -1,22 +1,37 @@
 version: '2'
-
 services:
-  website:
-    build: .
+  db:
+    image: postgres
     ports:
-      - '3000:3000'
+    - "5432"
+  app:
+    command: bundle exec puma -C config/puma.rb
+    ports:
+      - "3000"
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis:3.0.5
+    ports:
+      - '6379:6379'
     volumes:
-      - '.:/beaconoid'
-    env_file:
-      - '.env'
-
-  # sidekiq:
+      - /var/lib/redis/data
+  nginx:
+    image: nginx
+    volumes_from:
+      - app
+    depends_on:
+      - app
+  # db_backup:
+  #   image: equinoxone/postgres_backup:0.1
   #   depends_on:
-  #     - 'postgres'
-  #     - 'redis'
-  #   build: .
-  #   command: sidekiq -C config/sidekiq.yml
+  #     - db
   #   volumes:
-  #     - '.:/beaconoid'
-  #   env_file:
-  #     - '.env'
+  #     - ./backup:/backup
+  #   environment:
+  # #    - PGUSER=postgres
+  # #    - PGPASSWORD=
+  # #    - PGPORT=5432
+  # #    - PGHOST=db
+  #     - PGDATABASE=beacon_web_console_development
