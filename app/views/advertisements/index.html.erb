@@ -6,7 +6,7 @@
         	<%= render "shared/flash_message" %>
 	        <div id="page-wrapper">
                 <div class="container-fluid">
-                   <!-- Top Row with Charts -->
+                   <!-- Search functionality-->
 
 						<div class="well">
 							<%= form_tag advertisement_filter_path, class: "col-md-6 pull-left" do %>
@@ -18,7 +18,7 @@
 						  <%= link_to "New Advertisement", new_advertisement_path, class: "btn btn-primary col-md-2 pull-right" %>
 						</div>
 
-
+						<!-- Display all advertisements-->
 						<table class="table table-bordered table-striped">
 						  <thead>
 						    <tr>
@@ -51,6 +51,7 @@
 						    <% end %>
 						  </tbody>
 						</table>
+						<!-- Paginate Results-->
 						<ul class="pagination">
           					<%= will_paginate @advertisement, container: false %>
           				</ul>

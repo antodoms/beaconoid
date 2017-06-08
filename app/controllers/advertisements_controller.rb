@@ -9,6 +9,7 @@ class AdvertisementsController < ApplicationController
 		end
 	end
 
+	# search method
 	def filter
 		#binding.pry    
     	if params[:advertisement_search].present? && params[:advertisement_search][:filter].present?
@@ -20,6 +21,7 @@ class AdvertisementsController < ApplicationController
 			render json: @advertisement.map(&:name)
 		end
   	end
+
 
 	def index
 		if params[:advertisement_search].present?
@@ -63,6 +65,7 @@ class AdvertisementsController < ApplicationController
 		authorize @advertisement
 
    		if @advertisement.save
+   			#push to redis DB 
    			ActionCable.server.broadcast 'beaconoid:general_report',
 		      message: [0,0,0,0,0,1],
 		      user: current_user.id

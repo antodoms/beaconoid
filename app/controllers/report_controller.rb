@@ -9,6 +9,7 @@ class ReportController < ApplicationController
     end
   end
 
+  # method for Report index page
   def index
     authorize :report, :index?
 
@@ -23,6 +24,7 @@ class ReportController < ApplicationController
 
   end
 
+  # method for Report Store page
   def store
     authorize :report, :store?
 
@@ -45,6 +47,8 @@ class ReportController < ApplicationController
     @fetch_data_count = 1 if !@fetch_data_count.present?
   end
 
+
+  #method for REport Category Page
   def category
     authorize :report, :category?
 
@@ -53,21 +57,15 @@ class ReportController < ApplicationController
     else
       @click_data_category = CustomerTracking.group_by_category("click", (Time.now-1.month), Time.now)
     end
-    # if params[:fetch_page].present?
-    #   @fetch_data_category = CustomerTracking.group_by_category("fetch", (Time.now-1.month), Time.now, params[:fetch_page].to_i)
-    # else
-    #   @fetch_data_category = CustomerTracking.group_by_category("fetch", (Time.now-1.month), Time.now)
-    # end
-    #binding.pry
-    @click_data_count = CustomerTracking.group_by_category_count("click", (Time.now-1.month), Time.now)
-    # @fetch_data_count = CustomerTracking.group_by_category_count("fetch", (Time.now-1.month), Time.now)
     
-    #binding.pry
+    @click_data_count = CustomerTracking.group_by_category_count("click", (Time.now-1.month), Time.now)
+    
     @click_data_count = 1 if !@click_data_count.present?
-    # @fetch_data_count = 1 if !@fetch_data_count.present?
+   
   end
 
 
+  #method for REport Store Sale Page
   def sale
     authorize :report, :store?
 
@@ -82,11 +80,7 @@ class ReportController < ApplicationController
       @store_without_beacon = CustomerTracking.group_by_sale("without_beacon", (Time.now-1.month), Time.now, params[:without_beacon].to_i)
     end
    
-    #binding.pry
-   # @store_with_beacon_count = 1 if !@click_data_count.present?
-    #@store_without_beacon_count = 1 if !@fetch_data_count.present?
-
-
+  
   end
 
 

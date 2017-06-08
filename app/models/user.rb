@@ -2,6 +2,7 @@ class User < ApplicationRecord
   extend Devise::Models
   devise :database_authenticatable, :registerable, stretches: 12
 
+  # front end validation
   validates :password, :presence => { :on => :create }, :length   => { :minimum => 6, :allow_nil => true }, :confirmation => true
   validates_uniqueness_of :email
 
@@ -16,6 +17,7 @@ class User < ApplicationRecord
     end
   end
 
+  # the different roles used,
   def super_admin?
     self.role == "Super Admin"
   end
