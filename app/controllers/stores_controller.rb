@@ -89,6 +89,8 @@ class StoresController < ApplicationController
 
     @store.destroy
 
+    # push to redis db
+
     ActionCable.server.broadcast 'beaconoid:general_report',
       message: [0,0,0,-1,0,0],
       user: current_user.id

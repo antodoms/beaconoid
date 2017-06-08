@@ -12,6 +12,7 @@ class Advertisement < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
+  # method to search by advertisement name
   def self.filter_by_name(text)
     joins("INNER JOIN categories ON categories.id = advertisements.category_id").where("(LOWER(advertisements.name) like LOWER(?)) OR (LOWER(advertisements.description) like LOWER(?)) OR (LOWER(categories.name) like LOWER(?))", "%#{text}%", "%#{text}%", "%#{text}%")
   end

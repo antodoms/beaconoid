@@ -26,8 +26,6 @@ class StaffsController < ApplicationController
   end
 
   def create
-    # @user.password = "password"
-    # @user.password_confirmation = "password"
     @user = User.new(user_params)
     authorize @user
 

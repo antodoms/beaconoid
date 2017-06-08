@@ -3,6 +3,7 @@ class Store < ApplicationRecord
 	has_many :beacons
 
 
+	# Method to search by Store Name
 	def self.filter_by_name(text)
 		where("(LOWER(name) like LOWER(?))", "%#{text}%")
 	end

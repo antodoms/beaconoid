@@ -9,6 +9,7 @@ class CategoriesController < ApplicationController
 		end
 	end
 
+	#method for search
 	def filter	
 		if params[:category_search].present? && params[:category_search][:filter].present?
 			redirect_to categories_path(:category_search => params[:category_search][:filter])
@@ -81,6 +82,7 @@ class CategoriesController < ApplicationController
 	    	redirect_to categories_path, error: "#{@category.name} cannot be deleted. Active advertisements have been assigned to this category." and return
 	    end
 
+	    #push to redis dB
 	    @category.destroy
 	    ActionCable.server.broadcast 'beaconoid:general_report',
 		      message: [0,0,0,0,-1,0],

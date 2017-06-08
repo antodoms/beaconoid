@@ -6,8 +6,7 @@ class Beacon < ApplicationRecord
   belongs_to :store
   has_many :advertisements
 
-  #field :name, type: String
-
+  # Method to search by Beacon Name
   def self.filter_by_name(text)
     joins("INNER JOIN stores ON stores.id = beacons.store_id").where("(LOWER(stores.name) like LOWER(?)) OR (LOWER(beacons.name) like LOWER(?))", "%#{text}%", "%#{text}%")
   end
