@@ -1,0 +1,22 @@
+version: '2'
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - RACK_ENV=staging
+      - secret_key_base=785445dc18c10918a0130ed9b492a16134bcf6468ae73319e3be66f9dfbf28b9b965a369f88ebba5401a3c27ff852d38f0ed72a53d1e28337157be459fc19c3d
+      - ACCESS_KEY_ID=AKIAIVNB5GRUFKYIWLAA
+      - SECRET_ACCESS_KEY=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
+      - AWS_REGION=ap-southeast-2
+      - S3_HOSTNAME-s3-ap-southeast-2.amazonaws.com
+      - KONTAKT_API_KEY=aGfmIsbvOTZgPxjQZAQcSVpDpHyoBmfw
+      - PORT=3000
+    ports:
+      - 3000:3000
+  nginx:
+    volumes:
+      - ./nginx.staging.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80

@@ -14,13 +14,10 @@ default: &default
 development:
   <<: *default
   database: beacon_web_console_development
-  # host: db
-  # user: postgres
-  # password:
 
 staging:
   <<: *default
-  database: beaconoid_development
+  database: beacon_web_console_staging
   host: db
   user: postgres
   password:

@@ -9,7 +9,7 @@ staging:
     default:
       database: beaconoid_staging_mongo
       hosts:
-        - mongodb://mongo:27017
+        - mongo:27017
 test:
   clients:
     default:

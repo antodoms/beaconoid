@@ -1,6 +1,5 @@
 module Api::V1
   class StoresController < ActionController::API
-    include ActionController::Serialization
     #before_action :authenticate_user!
     
     def index
