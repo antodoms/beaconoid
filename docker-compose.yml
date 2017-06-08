@@ -6,15 +6,14 @@ services:
     - "5432"
   app:
     command: bundle exec puma -C config/puma.rb
-    ports:
-      - "3000"
     depends_on:
       - db
       - redis
+      - mongo
   redis:
     image: redis:3.0.5
     ports:
-      - '6379:6379'
+      - '6379'
     volumes:
       - /var/lib/redis/data
   nginx:
@@ -23,6 +22,11 @@ services:
       - app
     depends_on:
       - app
+  mongo:
+    image: mongo:3.0.2
+    ports:
+      - "27027"
+
   # db_backup:
   #   image: equinoxone/postgres_backup:0.1
   #   depends_on:

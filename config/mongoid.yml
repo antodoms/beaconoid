@@ -4,6 +4,12 @@ development:
       database: beacon_web_console_development_mongo
       hosts:
         - 127.0.0.1:27017
+staging:
+  clients:
+    default:
+      database: beaconoid_staging_mongo
+      hosts:
+        - mongodb://mongo:27017
 test:
   clients:
     default:
