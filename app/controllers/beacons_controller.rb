@@ -8,6 +8,7 @@ class BeaconsController < ApplicationController
 		end
 	end
 
+	# method for search
   def filter    
     if params[:beacon_search].present? && params[:beacon_search][:filter].present?
       redirect_to beacons_path(:beacon_search => params[:beacon_search][:filter])
@@ -19,7 +20,7 @@ class BeaconsController < ApplicationController
     end
   end
 		
-
+  	# creating request for Kontakt API
 	def create_request
 		Typhoeus::Request.new(
 	      "https://api.kontakt.io/device",
@@ -35,6 +36,8 @@ class BeaconsController < ApplicationController
 
 	end
 
+
+	# create registered, unregistered and other list
 	def index
 		json_data = JSON.parse(create_request.run.response_body)["devices"]
 		
@@ -91,7 +94,7 @@ class BeaconsController < ApplicationController
    		if @beacon.save
       		redirect_to beacons_path, notice: "#{@beacon.name} has been created succesfully" and return
    		else
-   			flash[:error] = @beacon.validate.html_safe
+   			flash[:error] = @beacon.validate
       		redirect_to new_beacon_path
    		end
 	end
@@ -126,8 +129,8 @@ class BeaconsController < ApplicationController
    		if @beacon.update_attributes(beacon_params)
       		redirect_to :action => 'index'
    		else
-   			flash[:error] = @beacon.validate.html_safe
-      		redirect_to edit_beacon_path
+   			flash[:error] = @beacon.validate
+      		redirect_to edit_beacon_path(@beacon)
    		end
    
 	end

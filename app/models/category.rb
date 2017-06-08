@@ -6,6 +6,7 @@ class Category < ApplicationRecord
 
 	WillPaginate.per_page = 10
 
+	# Method to search by Category Name
 	def self.filter_by_name(text)
 		where("(LOWER(name) like LOWER(?)) OR (LOWER(description) like LOWER(?))", "%#{text}%", "%#{text}%")
 	end

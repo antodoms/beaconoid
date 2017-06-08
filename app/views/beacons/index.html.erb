@@ -6,6 +6,7 @@
         	<%= render "shared/flash_message" %>
 	        <div id="page-wrapper">
                 <div class="container-fluid">
+                	<!-- Search functionality-->
 					<div class="well">
 					    <%= form_tag beacon_filter_path, class: "col-md-6 pull-left" do %>
 			              <div class="form-group col-md-10">
@@ -16,7 +17,7 @@
 					  	<%= link_to "New Beacon", new_beacon_path, class: "btn btn-primary col-md-2 pull-right" %>
 					</div>
 
-                    <!-- Top Row with Charts -->
+                    <!-- Display Beacons -->
 					<h3 style="float: left;">Unregistered List from Kontakt</h3>
 					<table class="table table-bordered table-striped" id="unregistered-list">
 					  <thead>
@@ -127,6 +128,8 @@
 					    <% end %>
 					  </tbody>
 					</table>
+
+					<!-- Pagination of beacon results-->
 					<ul class="pagination">
           				<%= will_paginate @other_list, container: false %>
           			</ul>

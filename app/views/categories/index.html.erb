@@ -6,7 +6,7 @@
       <%= render "shared/flash_message" %>
       <div id="page-wrapper">
         <div class="container-fluid">
-          <!-- Top Row with Charts -->
+          <!-- Search functionality-->
           <div class="well">
             <%= form_tag category_filter_path, class: "col-md-6 pull-left" do %>
               <div class="form-group col-md-10">
@@ -17,6 +17,7 @@
             <%= link_to "New Category", new_category_path, class: "btn btn-primary col-md-2 pull-right" %>
           </div>
 
+          <!-- Display Categories-->
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
@@ -47,6 +48,7 @@
               <% end %>
             </tbody>
           </table>
+          <!-- Paginate results-->
           <ul class="pagination">
             <%= will_paginate @category, container: false %>
           </ul>

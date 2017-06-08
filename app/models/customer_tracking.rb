@@ -10,18 +10,6 @@ class CustomerTracking
 	  	field :action, type: String
 	  	field :time, type: DateTime
 
-	# elsif Rails.env.production?
-	# 	include Dynamoid::Document
-	# 	field :customer_id
-	#   	field :category_id
-	#   	field :store_id
-	#   	field :advertisement_id
-	#   	field :beacon_id
-	#   	field :action
-	#   	field :time	
-	# end
-
-
   	def self.fetch
   		where(action: "fetch").all
   	end
@@ -39,7 +27,7 @@ class CustomerTracking
 	end
 
 
-
+	# Method to obtain data for Store Report
 	def self.group_by_store(action="click", time_from=Time.now-1.month, time_to=Time.now, page=1, limit=6)
 		final_data = []
 
@@ -64,7 +52,7 @@ class CustomerTracking
 	end
 
 	
-
+	# Method to obtain data for Sale Report in Stores with Beacons and Stores without Beacons
 	def self.group_by_sale(action="with_beacon", time_from=Time.now-1.month, time_to=Time.now, page=1, limit=6)
 
 		store_with_beacon = []
@@ -102,7 +90,7 @@ class CustomerTracking
 
 
 
-
+	# Method to query data for Category Report
 	def self.group_by_category(action="fetch", time_from=Time.now-1.month, time_to=Time.now, page=1, limit=6)
 		final_data = []
 
@@ -115,9 +103,12 @@ class CustomerTracking
 					{"$limit": limit*(page) },
 					{"$skip": limit*(page-1) }
 					])
+			
 			#binding.pry
 			ab.each do |c|
-				category_id = JSON.parse(c["_id"]).first
+				parsed_data = JSON.parse(c["_id"])
+				category_id = (parsed_data.is_a? Integer) ? parsed_data : parsed_data.first
+
 				category = Category.find_by(id: category_id)
 				if category.present?
 					final_data << [category.name, c["count"].to_i,  category_id]
@@ -146,11 +137,11 @@ class CustomerTracking
 			end
 		end
 
-		#binding.pry
 		final_data
 	end
 
 
+	# Method to query Store Report count so as to paginate the results
 	def self.group_by_store_count( action="click", time_from=Time.now-1.month, time_to=Time.now, limit=6)
 		ab = self.collection.aggregate([
 				{"$match": {"action": action} },
@@ -165,6 +156,7 @@ class CustomerTracking
 		count/limit if count.present?
 	end
 
+	# Method to query Category Report count so as to paginate the results
 	def self.group_by_category_count( action="click", time_from=Time.now-1.month, time_to=Time.now, limit=6)
 		if action == "click"
 			ab = self.collection.aggregate([

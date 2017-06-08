@@ -71,7 +71,7 @@ class StoresController < ApplicationController
     end
 
     flash[:error] = @store.validate.html_safe
-    redirect_to edit_store_path
+    redirect_to edit_store_path(@store)
   end
 
   def destroy
@@ -88,6 +88,8 @@ class StoresController < ApplicationController
     end
 
     @store.destroy
+
+    # push to redis db
 
     ActionCable.server.broadcast 'beaconoid:general_report',
       message: [0,0,0,-1,0,0],

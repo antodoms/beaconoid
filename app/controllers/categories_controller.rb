@@ -9,6 +9,7 @@ class CategoriesController < ApplicationController
 		end
 	end
 
+	#method for search
 	def filter	
 		if params[:category_search].present? && params[:category_search][:filter].present?
 			redirect_to categories_path(:category_search => params[:category_search][:filter])
@@ -50,7 +51,7 @@ class CategoriesController < ApplicationController
 		      user: current_user.id
 	      redirect_to categories_path, notice: "The Category has been created!" and return
 	    else
-	    	flash[:error] = @category.validate.html_safe
+	    	flash[:error] = @category.validate
 	    	redirect_to new_category_path
 	    end
 	end
@@ -67,8 +68,8 @@ class CategoriesController < ApplicationController
 	    if @category.update_attributes(category_params)
 	      	redirect_to categories_path, notice: "#{@category.name} has been updated!" and return
 	    else
-	    	flash[:error] = @category.validate.html_safe
-	    	redirect_to edit_category_path
+	    	flash[:error] = @category.validate
+	    	redirect_to edit_category_path(@category)
 	    end
 	  end
 
@@ -81,6 +82,7 @@ class CategoriesController < ApplicationController
 	    	redirect_to categories_path, error: "#{@category.name} cannot be deleted. Active advertisements have been assigned to this category." and return
 	    end
 
+	    #push to redis dB
 	    @category.destroy
 	    ActionCable.server.broadcast 'beaconoid:general_report',
 		      message: [0,0,0,0,-1,0],

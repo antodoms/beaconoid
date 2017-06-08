@@ -1,8 +1,8 @@
 <%# binding.pry %>
 <% if flash[:notice] %>
-  <div class="alert alert-success"><%= flash[:notice] %></div>
+  <div class="alert alert-success"><%= flash[:notice].html_safe %></div>
 <% elsif flash[:error] %>
-  <div class="alert alert-danger"><%= flash[:error] %></div>
+  <div class="alert alert-danger"><%= flash[:error].html_safe %></div>
 <% elsif flash[:alert] %>
-  <div class="alert alert-warning"><%= flash[:alert] %></div>
+  <div class="alert alert-warning"><%= flash[:alert].html_safe %></div>
 <% end %>

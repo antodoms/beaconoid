@@ -9,6 +9,7 @@ class AdvertisementsController < ApplicationController
 		end
 	end
 
+	# search method
 	def filter
 		#binding.pry    
     	if params[:advertisement_search].present? && params[:advertisement_search][:filter].present?
@@ -20,6 +21,7 @@ class AdvertisementsController < ApplicationController
 			render json: @advertisement.map(&:name)
 		end
   	end
+
 
 	def index
 		if params[:advertisement_search].present?
@@ -63,6 +65,7 @@ class AdvertisementsController < ApplicationController
 		authorize @advertisement
 
    		if @advertisement.save
+   			#push to redis DB 
    			ActionCable.server.broadcast 'beaconoid:general_report',
 		      message: [0,0,0,0,0,1],
 		      user: current_user.id
@@ -70,8 +73,8 @@ class AdvertisementsController < ApplicationController
    			@advertisements = Advertisement.all
       		redirect_to edit_advertisement_path(@advertisement)
    		else
-      		flash[:error] = @advertisement.validate.html_safe
-      		redirect_to new_beacon_path
+      		flash[:error] = @advertisement.validate
+      		redirect_to new_advertisement_path
    		end
 	end
 
@@ -89,10 +92,10 @@ class AdvertisementsController < ApplicationController
    		if @advertisement.update_attributes(advertisement_params)
    			@advertisements = Advertisement.all
       		#redirect_to beacon_path(@advertisement.beacon)
-      		redirect_to edit_beacon_path
+      		redirect_to edit_advertisement_path(@advertisement)
    		else
-      		flash[:error] = @advertisement.validate.html_safe
-      		redirect_to edit_beacon_path
+      		flash[:error] = @advertisement.validate
+      		redirect_to edit_advertisement_path(@advertisement)
    		end
    
 	end

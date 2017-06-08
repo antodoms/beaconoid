@@ -26,15 +26,13 @@ class StaffsController < ApplicationController
   end
 
   def create
-    # @user.password = "password"
-    # @user.password_confirmation = "password"
     @user = User.new(user_params)
     authorize @user
 
     if (User::USER_ROLES.include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "The User has been created!" and return
     else
-      flash[:error] = @user.validate.html_safe
+      flash[:error] = @user.validate
       redirect_to new_staff_path
     end
   end
@@ -56,8 +54,8 @@ class StaffsController < ApplicationController
     if (User.get_roles(current_user).include? (@user.role)) && @user.save
       redirect_to staffs_path, notice: "#{@user.name} has been updated!" and return
     else
-      flash[:error] = @user.validate.html_safe
-      redirect_to edit_staff_path
+      flash[:error] = @user.validate
+      redirect_to edit_staff_path(@user)
     end
   end
 

@@ -6,8 +6,7 @@
       <%= render "shared/flash_message" %>
       <div id="page-wrapper">
         <div class="container-fluid">
-          <!-- Top Row with Charts -->
-
+        <!-- Search functionality-->
           <div class="well">
             <%= form_tag store_filter_path, class: "col-md-6 pull-left" do %>
                     <div class="form-group col-md-10">
@@ -18,7 +17,7 @@
             <%= link_to "New Stores", new_store_path, class: "btn btn-primary col-md-2 pull-right" %>
           </div>
 
-          
+          <!-- Display all Stores-->
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
