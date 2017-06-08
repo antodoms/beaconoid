@@ -43,4 +43,15 @@ Rails.application.routes.draw do
     get 'about', to: "about#index"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
+  #api routes
+    constraints subdomain: "api" do
+        namespace :api do
+            namespace :v1 do
+              resources :stores
+              match 'advertisements', to: 'advertisements#index', via: [:get, :post]
+            end
+        end
+    end
 end
