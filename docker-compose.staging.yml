@@ -1,7 +1,9 @@
 version: '2'
 services:
   app:
-    build: .
+    #image: antodoms/beaconoid:0.1
+    #build: .
+    image: beaconoid:0.1
     volumes:
       - .:/app
     environment:
@@ -17,6 +19,6 @@ services:
       - 3000:3000
   nginx:
     volumes:
-      - ./nginx.staging.conf:/etc/nginx/conf.d/default.conf
+      - /Users/antodoms/rmit-projects/beaconoid/nginx.staging.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80

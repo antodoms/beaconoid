@@ -12,5 +12,3 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 COPY . .
-
-RUN bundle exec rake SECRET_KEY_BASE=5395b86a5ba1eb25e4aaa26c0212f8ee3a84dd508794216e737f3a8b2ef64644bc4c126e4027042bae6f06c77794986d3a0b3f498d30f14413ecafc40af4210d  assets:precompile

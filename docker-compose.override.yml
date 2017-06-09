@@ -9,7 +9,7 @@ services:
       - 3000:80
   nginx:
     volumes:
-      - ./nginx.devel.conf:/etc/nginx/conf.d/default.conf
+      - /Users/antodoms/rmit-projects/beaconoid/nginx.devel.conf
     ports:
       - 80:80
   # db_backup:
