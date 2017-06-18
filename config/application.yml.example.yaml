@@ -1,0 +1,26 @@
+# Add configuration values here, as shown below.
+
+development:
+  AWS_REGION: ap-southeast-2
+  AWS_ENDPOINT: http://s3:8000/
+  S3_HOSTNAME: s3-ap-southeast-2.amazonaws.com
+  ACCESS_KEY_ID: AKIAIVNB5GRUFKYIWLAA
+  SECRET_ACCESS_KEY: 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
+  KONTAKT_API_KEY: aGfmIsbvOTZgPxjQZAQcSVpDpHyoBmfw
+  WEBSOCKET_URL: ws://www.beaconoid.local/cable
+  RAILS_HOST: beaconoid.local
+  RAILS_MAX_THREADS: 2
+
+
+#You need this settings if you are deploying using capistrano.    
+production:
+  SECRET_KEY_BASE: 5395b86a5ba1eb25e4aaa26c0212f8ee3a84dd508794216e737f3a8b2ef64644bc4c126e4027042bae6f06c77794986d3a0b3f498d30f14413ecafc40af4210d
+  AWS_REGION: ap-southeast-2
+  AWS_ENDPOINT: http://s3:8000/
+  S3_HOSTNAME: s3-ap-southeast-2.amazonaws.com
+  ACCESS_KEY_ID: AKIAIVNB5GRUFKYIWLAA
+  SECRET_ACCESS_KEY: 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
+  KONTAKT_API_KEY: aGfmIsbvOTZgPxjQZAQcSVpDpHyoBmfw
+  WEBSOCKET_URL: ws://www.beaconoid.me/cable
+  RAILS_HOST: beaconoid.me
+  RAILS_MAX_THREADS: 2

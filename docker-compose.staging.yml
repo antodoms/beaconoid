@@ -1,24 +1,70 @@
 version: '2'
 services:
   app:
-    #image: antodoms/beaconoid:0.1
+    image: antodoms/beaconoid:0.1
     #build: .
-    image: beaconoid:0.1
     volumes:
       - .:/app
     environment:
       - RACK_ENV=staging
-      - secret_key_base=785445dc18c10918a0130ed9b492a16134bcf6468ae73319e3be66f9dfbf28b9b965a369f88ebba5401a3c27ff852d38f0ed72a53d1e28337157be459fc19c3d
-      - ACCESS_KEY_ID=AKIAIVNB5GRUFKYIWLAA
-      - SECRET_ACCESS_KEY=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
-      - AWS_REGION=ap-southeast-2
-      - S3_HOSTNAME-s3-ap-southeast-2.amazonaws.com
-      - KONTAKT_API_KEY=aGfmIsbvOTZgPxjQZAQcSVpDpHyoBmfw
       - PORT=3000
+      - SECRET_KEY_BASE=785445dc18c10918a0130ed9b492a16134bcf6468ae73319e3be66f9dfbf28b9b965a369f88ebba5401a3c27ff852d38f0ed72a53d1e28337157be459fc19c3d
+      - ACCESS_KEY_ID=accessKey1
+      - SECRET_ACCESS_KEY=verySecreyKey1
+      - AWS_REGION=us-east-1
+      - AWS_ENDPOINT=http://s3:8000/
+      - S3_HOSTNAME=s3.beaconoid.me
+      - WEBSOCKET_URL=ws://www.beaconoid.me/cable
+      - KONTAKT_API_KEY=aGfmIsbvOTZgPxjQZAQcSVpDpHyoBmfw
+      - RAILS_HOST=beaconoid.me
+      - RAILS_MAX_THREADS=2
     ports:
       - 3000:3000
+    container_name: beaconoid-app
+    networks:
+      default:
+        ipv4_address: 172.18.0.7
   nginx:
     volumes:
       - /Users/antodoms/rmit-projects/beaconoid/nginx.staging.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
+    container_name: beaconoid-nginx
+    networks:
+      default:
+        ipv4_address: 172.18.0.6
+  s3:
+    environment:
+      - SCALITY_ACCESS_KEY_ID=accessKey1
+      - SCALITY_SECRET_ACCESS_KEY=verySecreyKey1
+    ports:
+      - 8000:8000
+    volumes:
+      - /Users/antodoms/rmit-projects/beaconoid/s3_scality_config.json:/usr/src/app/config.json
+    container_name: beaconoid-s3bucket
+    networks:
+      default:
+        ipv4_address: 172.18.0.5
+  mongo:
+    container_name: beaconoid-mongodb
+    networks:
+      default:
+        ipv4_address: 172.18.0.4
+  db:
+    container_name: beaconoid-postgresdb
+    networks:
+      default:
+        ipv4_address: 172.18.0.3
+  redis:
+    container_name: beaconoid-redisdb
+    networks:
+      default:
+        ipv4_address: 172.18.0.2
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.18.0.0/16
+        gateway: 172.18.0.1

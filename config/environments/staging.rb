@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.action_cable.url = "ws://staging.beaconoid.me/cable"
+  config.action_cable.url = ENV['WEBSOCKET_URL']
   
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -28,6 +28,9 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.action_controller.default_url_options = { host: ENV['RAILS_HOST'] }
+  Rails.application.routes.default_url_options[:host] = ENV['RAILS_HOST']
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
@@ -47,6 +50,8 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  #config.action_dispatch.tld_length = 0
+
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Raises error for missing translations
@@ -58,12 +63,12 @@ Rails.application.configure do
 
   config.paperclip_defaults = {
     storage: :s3,
-    s3_region: ENV["AWS_REGION"],
     s3_credentials: {
-      s3_host_name: ENV["S3_HOSTNAME"],
       bucket: "beaconoid",
       access_key_id: ENV["ACCESS_KEY_ID"],
-      secret_access_key: ENV["SECRET_ACCESS_KEY"]
+      secret_access_key: ENV["SECRET_ACCESS_KEY"],
+      s3_region: ENV["AWS_REGION"],
+      s3_host_name: ENV["S3_HOSTNAME"]
       }
     } 
 end
